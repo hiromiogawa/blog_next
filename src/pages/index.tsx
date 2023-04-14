@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   getBlogs,
   getCategories,
@@ -11,6 +11,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '@/components/common/Layout'
 import Contents from '@/components/common/Contents'
+import Button1 from '@/components/atoms/button/Button1'
 
 import { IconContext } from 'react-icons'
 import { AiFillTag } from 'react-icons/ai'
@@ -35,7 +36,7 @@ const Home = ({ blogs, categories }: PropTypes) => {
           return (
             <section key={blogData.categoryName}>
               <h1>{blogData.categoryName}</h1>
-              <ul>
+              <StyledCardList wrap={blogData.categoryName === 'New'}>
                 {blogData.data.map((blog) => (
                   <li key={blog.title}>
                     <StyledCard>
@@ -56,10 +57,12 @@ const Home = ({ blogs, categories }: PropTypes) => {
                             <IconContext.Provider
                               value={{ color: '#ccc', size: '12px' }}
                             >
-                              <Link href={`/blog/${blog.category.id}/1`}>
+                              <StyledCategoryLink
+                                href={`/blog/${blog.category.id}/1`}
+                              >
                                 <StyleAiFillTag />
                                 {blog.category.name}
-                              </Link>
+                              </StyledCategoryLink>
                             </IconContext.Provider>
                           </StyledCategory>
 
@@ -77,14 +80,14 @@ const Home = ({ blogs, categories }: PropTypes) => {
                     </StyledCard>
                   </li>
                 ))}
-              </ul>
-              <Link
+              </StyledCardList>
+              <Button1
                 href={`/blog${
                   blogData.categoryId === 'new' ? '' : `/${blogData.categoryId}`
                 }/1`}
               >
                 view more
-              </Link>
+              </Button1>
             </section>
           )
         })}
@@ -103,6 +106,20 @@ const Home = ({ blogs, categories }: PropTypes) => {
 }
 
 export default Home
+
+const StyledCardList = styled.ul<{ wrap: boolean }>`
+  ${({ wrap }) =>
+    wrap &&
+    css`
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+
+      > li {
+        width: calc((100% - (24px * 2)) / 3);
+      }
+    `}
+`
 
 const StyledCard = styled.article`
   position: relative;
@@ -125,12 +142,19 @@ const StyledTime = styled.time`
 const StyledTitle = styled.h2`
   margin-top: 12px; // atomsになった際に削除
   color: #000;
-  font-size: 18px;
+  font-size: 16px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const StyledCategory = styled.p`
   margin-top: 12px; // atomsになった際に削除
   font-size: 14px;
+`
+const StyledCategoryLink = styled(Link)`
+  color: #000;
 `
 
 const StyledTags = styled.ul`
@@ -151,12 +175,13 @@ const StyledTag = styled(Link)`
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
-  const blogsData = await getBlogs()
+  const blogsData = await getBlogs(3)
   const categoriesData = await getCategories()
   const blogByCategoryData = await Promise.all(
     categoriesData.contents.map(async (category: CategoryType) => {
       const result: { contents: BlogType[] } = await getBlogsByCategory(
-        category.id
+        category.id,
+        9
       )
       return {
         categoryName: category.name,
