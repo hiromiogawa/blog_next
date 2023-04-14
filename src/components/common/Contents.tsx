@@ -11,8 +11,8 @@ const Contents = ({ children, ...props }: PropTypes) => {
 export default Contents
 
 const Scontents = styled.div`
-  max-width: 880px;
-  padding: 0 40px;
+  max-width: 960px;
+  padding: 0 80px;
   margin: 0 auto;
   width: 100%;
 `

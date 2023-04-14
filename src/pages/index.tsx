@@ -16,13 +16,8 @@ import Image from 'next/image'
 import Layout from '@/components/common/Layout'
 import Contents from '@/components/common/Contents'
 import Button1 from '@/components/atoms/button/Button1'
-import MaskAnimation from '@/components/animation/MaskAnimation'
-import Card from '@/components/molecules/Card'
 
-import CardList from '@/components/organisms/CardList'
-
-import { IconContext } from 'react-icons'
-import { AiFillTag } from 'react-icons/ai'
+import SlideCardList from '@/components/organisms/SlideCardList'
 
 // types
 import type { BlogType, CategoryType } from '@/types'
@@ -42,20 +37,20 @@ const Home = ({ blogs, categories }: PropTypes) => {
   return (
     <Layout>
       <Contents>
-        {blogs.map((blogData) => {
+        {blogs.map((blogData, index) => {
           if (blogData.data.length === 0) return null
           return (
-            <section key={blogData.categoryName}>
+            <StyledSection key={blogData.categoryName} index={index}>
               <StyledHeading>{blogData.categoryName}</StyledHeading>
-              <CardList CardListData={blogData.data} />
-              <Button1
+              <StyledSlideCardList cardListData={blogData.data} />
+              <StyledButton1
                 href={`/blog${
                   blogData.categoryId === 'new' ? '' : `/${blogData.categoryId}`
                 }/1`}
               >
                 more
-              </Button1>
-            </section>
+              </StyledButton1>
+            </StyledSection>
           )
         })}
         <ul>
@@ -74,29 +69,31 @@ const Home = ({ blogs, categories }: PropTypes) => {
 
 export default Home
 
+const StyledSection = styled.section<{ index: number }>`
+  ${({ index }) =>
+    index > 0 &&
+    css`
+      margin-top: 80px;
+    `}
+`
+
 const StyledHeading = styled.h1`
   font-family: 'Bungee Shade';
   color: #00ae95;
   font-size: 32px;
 `
 
-const StyledCardList = styled.ul<{ wrap: boolean }>`
-  ${({ wrap }) =>
-    wrap &&
-    css`
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
+const StyledSlideCardList = styled(SlideCardList)`
+  margin-top: 24px;
+`
 
-      > li {
-        width: calc((100% - (24px * 2)) / 3);
-      }
-    `}
+const StyledButton1 = styled(Button1)`
+  margin-top: 24px;
 `
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
-  const blogsData = await getBlogs(3)
+  const blogsData = await getBlogs(9)
   const categoriesData = await getCategories()
   const blogByCategoryData = await Promise.all(
     categoriesData.contents.map(async (category: CategoryType) => {
