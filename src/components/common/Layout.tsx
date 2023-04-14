@@ -1,5 +1,8 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
+
+// components
+import Header from '@/components/organisms/Header'
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -25,9 +28,14 @@ const Layout = ({ children }: PropTypes) => {
   return (
     <>
       <GlobalStyle />
-      <main>{children}</main>
+      <Header />
+      <StyledMain>{children}</StyledMain>
     </>
   )
 }
 
 export default Layout
+
+const StyledMain = styled.main`
+  margin-top: 56px;
+`
