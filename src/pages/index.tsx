@@ -6,17 +6,23 @@ import {
 } from '@/functions/getData'
 import convertDateFormat from '@/functions/convertDataFormat'
 
-// コンポーネント
+// hooks
+import { useRef } from 'react'
+import useScrollTrigger from '@/hooks/useScrollTrigger'
+
+// components
 import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '@/components/common/Layout'
 import Contents from '@/components/common/Contents'
 import Button1 from '@/components/atoms/button/Button1'
+import MaskAnimation from '@/components/animation/MaskAnimation'
+import Card from '@/components/molecules/Card'
 
 import { IconContext } from 'react-icons'
 import { AiFillTag } from 'react-icons/ai'
 
-// タイプ
+// types
 import type { BlogType, CategoryType } from '@/types'
 
 type PropTypes = {
@@ -28,6 +34,9 @@ type PropTypes = {
   categories: Pick<CategoryType, 'id' | 'name'>[]
 }
 const Home = ({ blogs, categories }: PropTypes) => {
+  const elementsRef = useRef(null)
+  const inView = useScrollTrigger(elementsRef)
+
   return (
     <Layout>
       <Contents>
@@ -38,46 +47,8 @@ const Home = ({ blogs, categories }: PropTypes) => {
               <h1>{blogData.categoryName}</h1>
               <StyledCardList wrap={blogData.categoryName === 'New'}>
                 {blogData.data.map((blog) => (
-                  <li key={blog.title}>
-                    <StyledCard>
-                      <StyledCardLink href={`/blog/detail/${blog.id}`} />
-                      <header>
-                        <p>
-                          <StyledTime>
-                            {convertDateFormat(blog.createdAt)}
-                          </StyledTime>
-                        </p>
-                      </header>
-                      <Link href={`/blog/detail/${blog.id}`}>
-                        <StyledTitle>{blog.title}</StyledTitle>
-                      </Link>
-                      {blog.tags.length !== 0 && (
-                        <footer>
-                          <StyledCategory>
-                            <IconContext.Provider
-                              value={{ color: '#ccc', size: '12px' }}
-                            >
-                              <StyledCategoryLink
-                                href={`/blog/${blog.category.id}/1`}
-                              >
-                                <StyleAiFillTag />
-                                {blog.category.name}
-                              </StyledCategoryLink>
-                            </IconContext.Provider>
-                          </StyledCategory>
-
-                          <StyledTags>
-                            {blog.tags.map((tag) => (
-                              <li key={tag.name}>
-                                <StyledTag href={`/blog/${tag.id}/1`}>
-                                  #{tag.name}
-                                </StyledTag>
-                              </li>
-                            ))}
-                          </StyledTags>
-                        </footer>
-                      )}
-                    </StyledCard>
+                  <li key={blog.title} ref={elementsRef}>
+                    <Card {...blog} />
                   </li>
                 ))}
               </StyledCardList>
