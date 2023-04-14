@@ -21,54 +21,33 @@ export default Button1
 const StyledButton1 = styled.div`
   font-family: 'Raleway';
   border: solid 1px #00ae95;
-  border-radius: 24px;
   width: 170px;
   line-height: 1;
   overflow: hidden;
+  border-radius: 8px;
+  box-shadow: -5px 5px 0px 0px rgba(0, 174, 149, 1);
+  margin: 0 0 5px 5px;
+  transition: transform 0.5s box-shadow 0.5s;
 
+  &:hover {
+    transform: translate(-5px, 5px);
+    box-shadow: 0px 0px 0px 0px rgba(0, 174, 149, 1);
+  }
   a {
     position: relative;
     display: block;
     padding: 11px 18.5px;
     background-color: #fff;
     overflow: hidden;
+    font-size: 20px;
+    text-align: center;
 
     span {
       position: relative;
       z-index: 3;
       color: #00ae95;
       transition: color 0.6s;
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 2;
-      background: #00ae95;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.6s cubic-bezier(0.8, 0, 0.2, 1) 0s;
-      transform: scale(0, 1);
-      transform-origin: right top;
-    }
-
-    &:hover {
-      span {
-        color: #fff;
-      }
-
-      &::before {
-        transform-origin: left top;
-        transform: scale(1, 1);
-      }
-    }
-
-    span {
-      display: block;
-      position: relative;
-      text-align: center;
+      font-family: 'Bungee Shade';
     }
   }
 `

@@ -19,6 +19,8 @@ import Button1 from '@/components/atoms/button/Button1'
 import MaskAnimation from '@/components/animation/MaskAnimation'
 import Card from '@/components/molecules/Card'
 
+import CardList from '@/components/organisms/CardList'
+
 import { IconContext } from 'react-icons'
 import { AiFillTag } from 'react-icons/ai'
 
@@ -44,20 +46,14 @@ const Home = ({ blogs, categories }: PropTypes) => {
           if (blogData.data.length === 0) return null
           return (
             <section key={blogData.categoryName}>
-              <h1>{blogData.categoryName}</h1>
-              <StyledCardList wrap={blogData.categoryName === 'New'}>
-                {blogData.data.map((blog) => (
-                  <li key={blog.title} ref={elementsRef}>
-                    <Card {...blog} />
-                  </li>
-                ))}
-              </StyledCardList>
+              <StyledHeading>{blogData.categoryName}</StyledHeading>
+              <CardList CardListData={blogData.data} />
               <Button1
                 href={`/blog${
                   blogData.categoryId === 'new' ? '' : `/${blogData.categoryId}`
                 }/1`}
               >
-                view more
+                more
               </Button1>
             </section>
           )
@@ -78,6 +74,12 @@ const Home = ({ blogs, categories }: PropTypes) => {
 
 export default Home
 
+const StyledHeading = styled.h1`
+  font-family: 'Bungee Shade';
+  color: #00ae95;
+  font-size: 32px;
+`
+
 const StyledCardList = styled.ul<{ wrap: boolean }>`
   ${({ wrap }) =>
     wrap &&
@@ -90,58 +92,6 @@ const StyledCardList = styled.ul<{ wrap: boolean }>`
         width: calc((100% - (24px * 2)) / 3);
       }
     `}
-`
-
-const StyledCard = styled.article`
-  position: relative;
-  background-color: #fff;
-  border-radius: 12px;
-  cursor: pointer;
-  padding: 16px;
-`
-
-const StyledCardLink = styled(Link)`
-  position: absolute;
-  inset: 0;
-`
-
-const StyledTime = styled.time`
-  color: #333;
-  font-size: 12px;
-`
-
-const StyledTitle = styled.h2`
-  margin-top: 12px; // atomsになった際に削除
-  color: #000;
-  font-size: 16px;
-  line-height: 1.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`
-
-const StyledCategory = styled.p`
-  margin-top: 12px; // atomsになった際に削除
-  font-size: 14px;
-`
-const StyledCategoryLink = styled(Link)`
-  color: #000;
-`
-
-const StyledTags = styled.ul`
-  margin-top: 8px; // atomsになった際に削除
-  font-size: 12px;
-  display: flex;
-  gap: 4px;
-  position: relative;
-`
-
-const StyleAiFillTag = styled(AiFillTag)`
-  margin-right: 4px;
-`
-
-const StyledTag = styled(Link)`
-  color: #000;
 `
 
 // データをテンプレートに受け渡す部分の処理を記述します
