@@ -97,6 +97,7 @@ const StyledCard = styled.article`
   box-shadow: -5px 5px 0px 0px rgba(0, 174, 149, 1);
   margin: 0 0 5px 5px;
   transition: transform 0.5s box-shadow 0.5s;
+  font-family: 'Zen Maru Gothic', sans-serif;
 
   &:hover {
     transform: translate(-5px, 5px);
