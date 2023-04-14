@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
@@ -11,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
 
     a {
         text-decoration: none;
+    }
+
+    body {
+      background-color: #f5f6f6
     }
 `
 

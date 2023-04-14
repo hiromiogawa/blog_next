@@ -5,12 +5,12 @@ import {
   getBlogsByCategory
 } from '@/functions/getData'
 import Router from 'next/router'
-import { PER_PAGE } from '@/config'
 
 // コンポーネント
 import Link from 'next/link'
 import Image from 'next/image'
-import ReactPaginate from 'react-paginate'
+import Layout from '@/components/common/Layout'
+import Contents from '@/components/common/Contents'
 
 // タイプ
 import type { BlogType, CategoryType } from '@/types'
@@ -25,44 +25,46 @@ type PropTypes = {
 }
 const Home = ({ blogs, categories }: PropTypes) => {
   return (
-    <>
-      {blogs.map((blogData) => {
-        if (blogData.data.length === 0) return null
-        return (
-          <section key={blogData.categoryName}>
-            <h1>{blogData.categoryName}</h1>
-            <ul>
-              {blogData.data.map((blog) => (
-                <li key={blog.title}>
-                  <Link href={`/blog/detail/${blog.id}`}>
-                    <h2>{blog.title}</h2>
-                  </Link>
-                  <Link href={`/blog/${blog.category.id}/1`}>
-                    {blog.category.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href={`/blog${
-                blogData.categoryId === 'new' ? '' : `/${blogData.categoryId}`
-              }/1`}
-            >
-              view more
-            </Link>
-          </section>
-        )
-      })}
-      <ul>
-        {categories.map((category) => (
-          <li key={category.name}>
-            <Link href={`/blog/${category.id}/1`}>
-              <h2>{category.name}</h2>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </>
+    <Layout>
+      <Contents>
+        {blogs.map((blogData) => {
+          if (blogData.data.length === 0) return null
+          return (
+            <section key={blogData.categoryName}>
+              <h1>{blogData.categoryName}</h1>
+              <ul>
+                {blogData.data.map((blog) => (
+                  <li key={blog.title}>
+                    <Link href={`/blog/detail/${blog.id}`}>
+                      <h2>{blog.title}</h2>
+                    </Link>
+                    <Link href={`/blog/${blog.category.id}/1`}>
+                      {blog.category.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={`/blog${
+                  blogData.categoryId === 'new' ? '' : `/${blogData.categoryId}`
+                }/1`}
+              >
+                view more
+              </Link>
+            </section>
+          )
+        })}
+        <ul>
+          {categories.map((category) => (
+            <li key={category.name}>
+              <Link href={`/blog/${category.id}/1`}>
+                <h2>{category.name}</h2>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Contents>
+    </Layout>
   )
 }
 
