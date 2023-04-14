@@ -10,9 +10,14 @@ import '@splidejs/react-splide/css/core'
 export type CardListType = {
   slide?: boolean
   cardListData: CardType[]
+  showCategory?: boolean
 }
 
-const SlideCardList = ({ cardListData, ...props }: CardListType) => {
+const SlideCardList = ({
+  cardListData,
+  showCategory = true,
+  ...props
+}: CardListType) => {
   return (
     <StyledSplidWrap {...props}>
       <Splide
@@ -28,7 +33,7 @@ const SlideCardList = ({ cardListData, ...props }: CardListType) => {
       >
         {cardListData.map((cardData) => (
           <SplideSlide key={cardData.title}>
-            <Card {...cardData} />
+            <Card {...cardData} showCategory={showCategory} />
           </SplideSlide>
         ))}
       </Splide>

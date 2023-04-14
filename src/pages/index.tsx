@@ -6,10 +6,6 @@ import {
 } from '@/functions/getData'
 import convertDateFormat from '@/functions/convertDataFormat'
 
-// hooks
-import { useRef } from 'react'
-import useScrollTrigger from '@/hooks/useScrollTrigger'
-
 // components
 import Link from 'next/link'
 import Image from 'next/image'
@@ -31,9 +27,6 @@ type PropTypes = {
   categories: Pick<CategoryType, 'id' | 'name'>[]
 }
 const Home = ({ blogs, categories }: PropTypes) => {
-  const elementsRef = useRef(null)
-  const inView = useScrollTrigger(elementsRef)
-
   return (
     <Layout>
       <Contents>
@@ -42,10 +35,15 @@ const Home = ({ blogs, categories }: PropTypes) => {
           return (
             <StyledSection key={blogData.categoryName} index={index}>
               <StyledHeading>{blogData.categoryName}</StyledHeading>
-              <StyledSlideCardList cardListData={blogData.data} />
+              <StyledSlideCardList
+                cardListData={blogData.data}
+                showCategory={blogData.categoryName === 'New' ? true : false}
+              />
               <StyledButton1
                 href={`/blog${
-                  blogData.categoryId === 'new' ? '' : `/${blogData.categoryId}`
+                  blogData.categoryId === 'new'
+                    ? ''
+                    : `/category/${blogData.categoryId}`
                 }/1`}
               >
                 more

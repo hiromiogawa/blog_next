@@ -22,10 +22,19 @@ import type { BlogType } from '@/types'
 export type CardType = Pick<
   BlogType,
   'id' | 'category' | 'createdAt' | 'title' | 'tags'
->
+> & {
+  showCategory?: boolean
+}
 
 // 一覧のCardコンポーネント
-const Card = ({ id, category, createdAt, title, tags }: CardType) => {
+const Card = ({
+  id,
+  category,
+  createdAt,
+  title,
+  tags,
+  showCategory = true
+}: CardType) => {
   const elementsRef = useRef(null)
   const inView = useScrollTrigger(elementsRef)
 
@@ -44,19 +53,25 @@ const Card = ({ id, category, createdAt, title, tags }: CardType) => {
           </Link>
           {tags.length !== 0 && (
             <footer>
-              <StyledCategory>
-                <IconContext.Provider value={{ color: '#ccc', size: '12px' }}>
-                  <StyledCategoryLink href={`/blog/${category.id}/1`}>
-                    <StyleAiFillTag />
-                    {category.name}
-                  </StyledCategoryLink>
-                </IconContext.Provider>
-              </StyledCategory>
+              {showCategory && (
+                <StyledCategory>
+                  <IconContext.Provider
+                    value={{ color: '#00ae95', size: '8px' }}
+                  >
+                    <StyledCategoryLink
+                      href={`/blog/category/${category.id}/1`}
+                    >
+                      <StyleAiFillTag />
+                      {category.name}
+                    </StyledCategoryLink>
+                  </IconContext.Provider>
+                </StyledCategory>
+              )}
 
               <StyledTags>
                 {tags.map((tag) => (
                   <li key={tag.name}>
-                    <StyledTag href={`/blog/${tag.id}/1`}>
+                    <StyledTag href={`/blog/tag/${tag.id}/1`}>
                       #{tag.name}
                     </StyledTag>
                   </li>
@@ -112,9 +127,14 @@ const StyledTitle = styled.h2`
 const StyledCategory = styled.p`
   margin-top: 12px; // atomsになった際に削除
   font-size: 14px;
+  position: relative;
 `
 const StyledCategoryLink = styled(Link)`
   color: #000;
+
+  &:hover {
+    color: #00ae95;
+  }
 `
 
 const StyledTags = styled.ul`
@@ -131,4 +151,8 @@ const StyleAiFillTag = styled(AiFillTag)`
 
 const StyledTag = styled(Link)`
   color: #000;
+
+  &:hover {
+    color: #00ae95;
+  }
 `
