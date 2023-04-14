@@ -4,13 +4,16 @@ import {
   getCategories,
   getBlogsByCategory
 } from '@/functions/getData'
-import Router from 'next/router'
+import convertDateFormat from '@/functions/convertDataFormat'
 
 // コンポーネント
 import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '@/components/common/Layout'
 import Contents from '@/components/common/Contents'
+
+import { IconContext } from 'react-icons'
+import { AiFillTag } from 'react-icons/ai'
 
 // タイプ
 import type { BlogType, CategoryType } from '@/types'
@@ -19,7 +22,7 @@ type PropTypes = {
   blogs: {
     categoryName: string
     categoryId: string
-    data: Pick<BlogType, 'id' | 'category' | 'createdAt' | 'title'>[]
+    data: Pick<BlogType, 'id' | 'category' | 'createdAt' | 'title' | 'tags'>[]
   }[]
   categories: Pick<CategoryType, 'id' | 'name'>[]
 }
@@ -35,12 +38,43 @@ const Home = ({ blogs, categories }: PropTypes) => {
               <ul>
                 {blogData.data.map((blog) => (
                   <li key={blog.title}>
-                    <Link href={`/blog/detail/${blog.id}`}>
-                      <h2>{blog.title}</h2>
-                    </Link>
-                    <Link href={`/blog/${blog.category.id}/1`}>
-                      {blog.category.name}
-                    </Link>
+                    <StyledCard>
+                      <StyledCardLink href={`/blog/detail/${blog.id}`} />
+                      <header>
+                        <p>
+                          <StyledTime>
+                            {convertDateFormat(blog.createdAt)}
+                          </StyledTime>
+                        </p>
+                      </header>
+                      <Link href={`/blog/detail/${blog.id}`}>
+                        <StyledTitle>{blog.title}</StyledTitle>
+                      </Link>
+                      {blog.tags.length !== 0 && (
+                        <footer>
+                          <StyledCategory>
+                            <IconContext.Provider
+                              value={{ color: '#ccc', size: '12px' }}
+                            >
+                              <Link href={`/blog/${blog.category.id}/1`}>
+                                <StyleAiFillTag />
+                                {blog.category.name}
+                              </Link>
+                            </IconContext.Provider>
+                          </StyledCategory>
+
+                          <StyledTags>
+                            {blog.tags.map((tag) => (
+                              <li key={tag.name}>
+                                <StyledTag href={`/blog/${tag.id}/1`}>
+                                  #{tag.name}
+                                </StyledTag>
+                              </li>
+                            ))}
+                          </StyledTags>
+                        </footer>
+                      )}
+                    </StyledCard>
                   </li>
                 ))}
               </ul>
@@ -69,6 +103,51 @@ const Home = ({ blogs, categories }: PropTypes) => {
 }
 
 export default Home
+
+const StyledCard = styled.article`
+  position: relative;
+  background-color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 16px;
+`
+
+const StyledCardLink = styled(Link)`
+  position: absolute;
+  inset: 0;
+`
+
+const StyledTime = styled.time`
+  color: #333;
+  font-size: 12px;
+`
+
+const StyledTitle = styled.h2`
+  margin-top: 12px; // atomsになった際に削除
+  color: #000;
+  font-size: 18px;
+`
+
+const StyledCategory = styled.p`
+  margin-top: 12px; // atomsになった際に削除
+  font-size: 14px;
+`
+
+const StyledTags = styled.ul`
+  margin-top: 8px; // atomsになった際に削除
+  font-size: 12px;
+  display: flex;
+  gap: 4px;
+  position: relative;
+`
+
+const StyleAiFillTag = styled(AiFillTag)`
+  margin-right: 4px;
+`
+
+const StyledTag = styled(Link)`
+  color: #000;
+`
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {

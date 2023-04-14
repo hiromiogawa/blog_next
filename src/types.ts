@@ -7,6 +7,15 @@ export type CategoryType = {
   name: string
 }
 
+/** タグ */
+export type TagType = {
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  name: string
+}
+
 /** ブログ */
 export type BlogType = {
   id: string
@@ -17,6 +26,7 @@ export type BlogType = {
   title: string
   content: string
   category: CategoryType
+  tags: TagType[]
   connections: BlogType[]
 }
 
