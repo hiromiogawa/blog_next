@@ -5,6 +5,11 @@ export type CategoryType = {
   updatedAt: string
   publishedAt: string
   name: string
+  logo: {
+    url: string
+    height: number
+    width: number
+  }
 }
 
 /** タグ */

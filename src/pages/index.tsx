@@ -24,7 +24,7 @@ type PropTypes = {
     categoryId: string
     data: Pick<BlogType, 'id' | 'category' | 'createdAt' | 'title' | 'tags'>[]
   }[]
-  categories: Pick<CategoryType, 'id' | 'name'>[]
+  categories: Pick<CategoryType, 'id' | 'name' | 'logo'>[]
 }
 const Home = ({ blogs, categories }: PropTypes) => {
   return (
@@ -51,15 +51,23 @@ const Home = ({ blogs, categories }: PropTypes) => {
             </StyledSection>
           )
         })}
-        <ul>
-          {categories.map((category) => (
-            <li key={category.name}>
-              <Link href={`/blog/${category.id}/1`}>
-                <h2>{category.name}</h2>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <StyledAside>
+          <ul>
+            {categories.map((category) => (
+              <li key={category.name}>
+                <Link href={`/blog/${category.id}/1`}>
+                  <Image
+                    src={category.logo.url}
+                    alt={category.name}
+                    width={category.logo.width}
+                    height={category.logo.height}
+                  />
+                  <h2>{category.name}</h2>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </StyledAside>
       </Contents>
     </Layout>
   )
@@ -88,6 +96,8 @@ const StyledSlideCardList = styled(SlideCardList)`
 const StyledButton1 = styled(Button1)`
   margin-top: 24px;
 `
+
+const StyledAside = styled.aside``
 
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
