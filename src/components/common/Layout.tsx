@@ -2,7 +2,12 @@ import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
 // components
-import Header from '@/components/organisms/Header'
+import HeaderContents from '@/components/organisms/HeaderContents'
+import Contents from '@/components/common/Contents'
+import MainContents from '@/components/organisms/MainContents'
+import SideContents, {
+  SideContentsType
+} from '@/components/organisms/SideContents'
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -20,22 +25,27 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
-type PropTypes = {
+export type LayoutType = {
   children: React.ReactNode
-}
+} & SideContentsType
 
-const Layout = ({ children }: PropTypes) => {
+const Layout = ({ children, categories }: LayoutType) => {
   return (
     <>
       <GlobalStyle />
-      <Header />
-      <StyledMain>{children}</StyledMain>
+      <HeaderContents />
+      <StyledContents>
+        <MainContents>{children}</MainContents>
+        <SideContents categories={categories} />
+      </StyledContents>
     </>
   )
 }
 
 export default Layout
 
-const StyledMain = styled.main`
+const StyledContents = styled(Contents)`
+  display: flex;
+  justify-content: center;
   margin-top: 56px;
 `

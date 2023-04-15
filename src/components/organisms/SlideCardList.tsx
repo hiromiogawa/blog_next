@@ -48,9 +48,12 @@ const StyledSplidWrap = styled.div`
 
   .splide__arrow {
     position: absolute;
-    top: calc(50% - 16px);
-    width: 32px;
-    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: calc(50% - 8px);
+    width: 16px;
+    height: 16px;
     cursor: pointer;
     outline: none;
     padding: 0;
@@ -58,40 +61,40 @@ const StyledSplidWrap = styled.div`
     background-color: #fff;
     border: solid 1px #00ae95;
     border-radius: 12px;
-    box-shadow: -4px 4px 0px 0px rgba(0, 174, 149, 1);
-    margin: 0 0 4px 4px;
+    box-shadow: -2px 2px 0px 0px rgba(0, 174, 149, 1);
+    margin: 0 0 2px 2px;
     transition: transform 0.5s box-shadow 0.5s;
 
     &::after {
       content: '';
       display: inline-block;
-      width: 9px;
-      height: 9px;
-      border-left: 2px solid #00ae95;
-      border-bottom: 2px solid #00ae95;
+      width: 4.5px;
+      height: 4.5px;
+      border-left: 1px solid #00ae95;
+      border-bottom: 1px solid #00ae95;
       transform: rotate(45deg);
-      margin-right: -4px;
+      margin-right: -2px;
     }
     svg {
       display: none;
     }
 
     &--prev {
-      left: -48px;
+      left: -24px;
 
       &:hover {
-        transform: translate(-4px, 4px);
+        transform: translate(-2px, 2px);
         box-shadow: 0px 0px 0px 0px rgba(0, 174, 149, 1);
       }
     }
 
     &--next {
-      right: -48px;
+      right: -24px;
       transform: rotate(180deg);
-      box-shadow: 4px -4px 0px 0px rgba(0, 174, 149, 1);
+      box-shadow: 2px -2px 0px 0px rgba(0, 174, 149, 1);
 
       &:hover {
-        transform: rotate(180deg) translate(4px, -4px);
+        transform: rotate(180deg) translate(2px, -2px);
         box-shadow: 0px 0px 0px 0px rgba(0, 174, 149, 1);
       }
     }

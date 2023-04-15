@@ -5,14 +5,14 @@ type PropTypes = {
 }
 
 const Contents = ({ children, ...props }: PropTypes) => {
-  return <Scontents {...props}>{children}</Scontents>
+  return <StyledContents {...props}>{children}</StyledContents>
 }
 
 export default Contents
 
-const Scontents = styled.div`
-  max-width: 960px;
-  padding: 0 80px;
+const StyledContents = styled.main`
+  max-width: 1264px;
+  padding: 0 32px;
   margin: 0 auto;
   width: 100%;
 `

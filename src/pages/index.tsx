@@ -4,13 +4,11 @@ import {
   getCategories,
   getBlogsByCategory
 } from '@/functions/getData'
-import convertDateFormat from '@/functions/convertDataFormat'
 
 // components
 import Link from 'next/link'
 import Image from 'next/image'
-import Layout from '@/components/common/Layout'
-import Contents from '@/components/common/Contents'
+import Layout, { LayoutType } from '@/components/common/Layout'
 import Button1 from '@/components/atoms/button/Button1'
 
 import SlideCardList from '@/components/organisms/SlideCardList'
@@ -24,51 +22,31 @@ type PropTypes = {
     categoryId: string
     data: Pick<BlogType, 'id' | 'category' | 'createdAt' | 'title' | 'tags'>[]
   }[]
-  categories: Pick<CategoryType, 'id' | 'name' | 'logo'>[]
-}
+} & LayoutType
 const Home = ({ blogs, categories }: PropTypes) => {
   return (
-    <Layout>
-      <Contents>
-        {blogs.map((blogData, index) => {
-          if (blogData.data.length === 0) return null
-          return (
-            <StyledSection key={blogData.categoryName} index={index}>
-              <StyledHeading>{blogData.categoryName}</StyledHeading>
-              <StyledSlideCardList
-                cardListData={blogData.data}
-                showCategory={blogData.categoryName === 'New' ? true : false}
-              />
-              <StyledButton1
-                href={`/blog${
-                  blogData.categoryId === 'new'
-                    ? ''
-                    : `/category/${blogData.categoryId}`
-                }/1`}
-              >
-                more
-              </StyledButton1>
-            </StyledSection>
-          )
-        })}
-        <StyledAside>
-          <ul>
-            {categories.map((category) => (
-              <li key={category.name}>
-                <Link href={`/blog/${category.id}/1`}>
-                  <Image
-                    src={category.logo.url}
-                    alt={category.name}
-                    width={category.logo.width}
-                    height={category.logo.height}
-                  />
-                  <h2>{category.name}</h2>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </StyledAside>
-      </Contents>
+    <Layout categories={categories}>
+      {blogs.map((blogData, index) => {
+        if (blogData.data.length === 0) return null
+        return (
+          <StyledSection key={blogData.categoryName} index={index}>
+            <StyledHeading>{blogData.categoryName}</StyledHeading>
+            <StyledSlideCardList
+              cardListData={blogData.data}
+              showCategory={blogData.categoryName === 'New' ? true : false}
+            />
+            <StyledButton1
+              href={`/blog${
+                blogData.categoryId === 'new'
+                  ? ''
+                  : `/category/${blogData.categoryId}`
+              }/1`}
+            >
+              more
+            </StyledButton1>
+          </StyledSection>
+        )
+      })}
     </Layout>
   )
 }
