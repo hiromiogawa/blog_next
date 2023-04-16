@@ -9,7 +9,7 @@ import Link from 'next/link'
 import MaskAnimation from '@/components/animation/MaskAnimation'
 import CardHeader from '@/components/molecules/CardHeader'
 import Heading2 from '@/components/atoms/text/Heading2'
-import CardFooter from '@/components/molecules/CardFooter'
+import CardFooter, { CardFooterType } from '@/components/molecules/CardFooter'
 
 // type
 import type { BlogType } from '@/types'
@@ -18,9 +18,8 @@ import type { BlogType } from '@/types'
 export type CardType = Pick<
   BlogType,
   'id' | 'category' | 'createdAt' | 'title' | 'tags'
-> & {
-  showCategory?: boolean
-}
+> &
+  Pick<CardFooterType, 'showCategory'>
 
 // 一覧のCardコンポーネント
 const Card = ({
@@ -44,7 +43,7 @@ const Card = ({
             <StyledHeading2>{title}</StyledHeading2>
           </Link>
           {(tags.length !== 0 || showCategory) && (
-            <CardFooter
+            <StyledCardFooter
               tags={tags}
               category={category}
               showCategory={showCategory}
@@ -82,5 +81,9 @@ const StyledCardLink = styled(Link)`
 `
 
 const StyledHeading2 = styled(Heading2)`
+  margin-top: 12px;
+`
+
+const StyledCardFooter = styled(CardFooter)`
   margin-top: 12px;
 `
