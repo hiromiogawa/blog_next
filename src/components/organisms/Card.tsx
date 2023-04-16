@@ -13,6 +13,8 @@ import MaskAnimation from '@/components/animation/MaskAnimation'
 import CardHeader from '@/components/molecules/CardHeader'
 import Heading2 from '@/components/atoms/text/Heading2'
 import CategoryText from '@/components/atoms/text/CategoryText'
+import TagList from '@/components/molecules/TagList'
+
 import TagText from '@/components/atoms/text/TagText'
 
 // type
@@ -55,14 +57,7 @@ const Card = ({
                 </StyledCategoryText>
               )}
 
-              <StyledTags>
-                {tags.length > 0 &&
-                  tags.map((tag) => (
-                    <li key={tag.name}>
-                      <TagText id={tag.id}>{tag.name}</TagText>
-                    </li>
-                  ))}
-              </StyledTags>
+              <StyledTagList tags={tags} />
             </footer>
           )}
         </StyledCard>
@@ -104,18 +99,6 @@ const StyledCategoryText = styled(CategoryText)`
   margin-top: 12px; // atomsになった際に削除
 `
 
-const StyledTags = styled.ul`
-  margin-top: 8px; // atomsになった際に削除
-  font-size: 12px;
-  display: flex;
-  gap: 4px;
-  position: relative;
-`
-
-const StyledTag = styled(Link)`
-  color: #000;
-
-  &:hover {
-    color: #00ae95;
-  }
+const StyledTagList = styled.ul`
+  margin-top: 8px;
 `
