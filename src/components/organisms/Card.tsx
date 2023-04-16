@@ -7,17 +7,13 @@ import convertDateFormat from '@/functions/convertDataFormat'
 import { useRef } from 'react'
 import useScrollTrigger from '@/hooks/useScrollTrigger'
 
-// context
-import { IconContext } from 'react-icons'
-
 // components
 import Link from 'next/link'
 import MaskAnimation from '@/components/animation/MaskAnimation'
 import CardHeader from '@/components/molecules/CardHeader'
 import Heading2 from '@/components/atoms/text/Heading2'
-import { AiFillTag } from 'react-icons/ai'
-
-import CategoryText from '@/components/atoms/text/Categorytext'
+import CategoryText from '@/components/atoms/text/CategoryText'
+import TagText from '@/components/atoms/text/TagText'
 
 // type
 import type { BlogType } from '@/types'
@@ -60,13 +56,12 @@ const Card = ({
               )}
 
               <StyledTags>
-                {tags.map((tag) => (
-                  <li key={tag.name}>
-                    <StyledTag href={`/blog/tag/${tag.id}/1`}>
-                      #{tag.name}
-                    </StyledTag>
-                  </li>
-                ))}
+                {tags.length > 0 &&
+                  tags.map((tag) => (
+                    <li key={tag.name}>
+                      <TagText id={tag.id}>{tag.name}</TagText>
+                    </li>
+                  ))}
               </StyledTags>
             </footer>
           )}
@@ -108,13 +103,6 @@ const StyledHeading2 = styled(Heading2)`
 const StyledCategoryText = styled(CategoryText)`
   margin-top: 12px; // atomsになった際に削除
 `
-const StyledCategoryLink = styled(Link)`
-  color: #000;
-
-  &:hover {
-    color: #00ae95;
-  }
-`
 
 const StyledTags = styled.ul`
   margin-top: 8px; // atomsになった際に削除
@@ -122,10 +110,6 @@ const StyledTags = styled.ul`
   display: flex;
   gap: 4px;
   position: relative;
-`
-
-const StyleAiFillTag = styled(AiFillTag)`
-  margin-right: 4px;
 `
 
 const StyledTag = styled(Link)`

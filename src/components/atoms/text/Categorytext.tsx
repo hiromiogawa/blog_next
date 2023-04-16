@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { AiFillTag } from 'react-icons/ai'
 
 // type
-import { CategoryType } from '@/types'
+import type { CategoryType } from '@/types'
 
 export type CategoryTextType = Pick<CategoryType, 'id'> & {
   children: CategoryType['name']
