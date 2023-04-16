@@ -27,10 +27,10 @@ type PropTypes = {
 const Home = ({ blogs, categories }: PropTypes) => {
   return (
     <Layout categories={categories}>
-      {blogs.map((blogData) => {
+      {blogs.map((blogData, index) => {
         if (blogData.data.length === 0) return null
         return (
-          <SlideBlogList
+          <StyledSlideBlogList
             key={blogData.categoryName}
             blogsData={blogData.data}
             title={blogData.categoryName}
@@ -40,6 +40,7 @@ const Home = ({ blogs, categories }: PropTypes) => {
                 : `/category/${blogData.categoryId}`
             }/1`}
             showCategory={blogData.categoryName === 'New'}
+            index={index}
           />
         )
       })}
@@ -49,7 +50,7 @@ const Home = ({ blogs, categories }: PropTypes) => {
 
 export default Home
 
-const StyledSection = styled.section<{ index: number }>`
+const StyledSlideBlogList = styled(SlideBlogList)<{ index: number }>`
   ${({ index }) =>
     index > 0 &&
     css`

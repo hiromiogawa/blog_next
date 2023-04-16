@@ -22,10 +22,11 @@ const SlideBlogList = ({
   title,
   blogsData,
   listHref,
-  showCategory
+  showCategory,
+  ...props
 }: SlideBlogListType) => {
   return (
-    <StyledSection>
+    <StyledSection {...props}>
       <StyledHeading>{title}</StyledHeading>
       <StyledSlideCardList
         cardListData={blogsData}
