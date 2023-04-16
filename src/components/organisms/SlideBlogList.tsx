@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 // components
+import Heading1 from '@/components/atoms/text/Heading1'
 import SlideCardList, {
   SlideCardListType
 } from '@/components/molecules/SlideCardList'
@@ -26,20 +27,18 @@ const SlideBlogList = ({
   ...props
 }: SlideBlogListType) => {
   return (
-    <StyledSection {...props}>
-      <StyledHeading>{title}</StyledHeading>
+    <section {...props}>
+      <Heading1>{title}</Heading1>
       <StyledSlideCardList
         cardListData={blogsData}
         showCategory={showCategory}
       />
       <StyledButton1 href={listHref}>more</StyledButton1>
-    </StyledSection>
+    </section>
   )
 }
 
 export default SlideBlogList
-
-const StyledSection = styled.section``
 
 const StyledHeading = styled.h1`
   font-family: 'Bungee Shade';
