@@ -1,8 +1,5 @@
 import styled from 'styled-components'
 
-// functions
-import convertDateFormat from '@/functions/convertDataFormat'
-
 // hooks
 import { useRef } from 'react'
 import useScrollTrigger from '@/hooks/useScrollTrigger'
@@ -12,10 +9,7 @@ import Link from 'next/link'
 import MaskAnimation from '@/components/animation/MaskAnimation'
 import CardHeader from '@/components/molecules/CardHeader'
 import Heading2 from '@/components/atoms/text/Heading2'
-import CategoryText from '@/components/atoms/text/CategoryText'
-import TagList from '@/components/molecules/TagList'
-
-import TagText from '@/components/atoms/text/TagText'
+import CardFooter from '@/components/molecules/CardFooter'
 
 // type
 import type { BlogType } from '@/types'
@@ -49,16 +43,12 @@ const Card = ({
           <Link href={`/blog/detail/${id}`}>
             <StyledHeading2>{title}</StyledHeading2>
           </Link>
-          {tags.length !== 0 && (
-            <footer>
-              {showCategory && (
-                <StyledCategoryText id={category.id}>
-                  {category.name}
-                </StyledCategoryText>
-              )}
-
-              <StyledTagList tags={tags} />
-            </footer>
+          {(tags.length !== 0 || showCategory) && (
+            <CardFooter
+              tags={tags}
+              category={category}
+              showCategory={showCategory}
+            />
           )}
         </StyledCard>
       </MaskAnimation>
@@ -93,12 +83,4 @@ const StyledCardLink = styled(Link)`
 
 const StyledHeading2 = styled(Heading2)`
   margin-top: 12px;
-`
-
-const StyledCategoryText = styled(CategoryText)`
-  margin-top: 12px; // atomsになった際に削除
-`
-
-const StyledTagList = styled.ul`
-  margin-top: 8px;
 `
