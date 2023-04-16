@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 // components
-import Card, { CardType } from '../molecules/Card'
+import Card, { CardType } from './Card'
 
 export type CardListType = {
   CardListData: CardType[]

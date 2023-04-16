@@ -13,6 +13,8 @@ import { IconContext } from 'react-icons'
 // components
 import Link from 'next/link'
 import MaskAnimation from '@/components/animation/MaskAnimation'
+import CardHeader from '@/components/molecules/CardHeader'
+import Heading2 from '@/components/atoms/text/Heading2'
 import { AiFillTag } from 'react-icons/ai'
 
 // type
@@ -43,13 +45,9 @@ const Card = ({
       <MaskAnimation trigger={inView} backgroundColor="#00AE95">
         <StyledCard>
           <StyledCardLink href={`/blog/detail/${id}`} />
-          <header>
-            <p>
-              <StyledTime>{convertDateFormat(createdAt)}</StyledTime>
-            </p>
-          </header>
+          <CardHeader createdAt={createdAt} />
           <Link href={`/blog/detail/${id}`}>
-            <StyledTitle>{title}</StyledTitle>
+            <StyledHeading2>{title}</StyledHeading2>
           </Link>
           {tags.length !== 0 && (
             <footer>
@@ -110,19 +108,8 @@ const StyledCardLink = styled(Link)`
   inset: 0;
 `
 
-const StyledTime = styled.time`
-  color: #333;
-  font-size: 12px;
-`
-
-const StyledTitle = styled.h2`
-  margin-top: 12px; // atomsになった際に削除
-  color: #000;
-  font-size: 16px;
-  line-height: 1.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const StyledHeading2 = styled(Heading2)`
+  margin-top: 12px;
 `
 
 const StyledCategory = styled.p`

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Heading1 from '@/components/atoms/text/Heading1'
 import SlideCardList, {
   SlideCardListType
-} from '@/components/molecules/SlideCardList'
+} from '@/components/organisms/SlideCardList'
 import Button1 from '@/components/atoms/button/Button1'
 
 export type SlideBlogListType = {

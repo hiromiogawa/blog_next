@@ -12,7 +12,7 @@ import Layout, { LayoutType } from '@/components/common/Layout'
 import Button1 from '@/components/atoms/button/Button1'
 import SlideBlogList from '@/components/organisms/SlideBlogList'
 
-import SlideCardList from '@/components/molecules/SlideCardList'
+import SlideCardList from '@/components/organisms/SlideCardList'
 
 // types
 import type { BlogType, CategoryType } from '@/types'
