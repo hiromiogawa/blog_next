@@ -17,6 +17,8 @@ import CardHeader from '@/components/molecules/CardHeader'
 import Heading2 from '@/components/atoms/text/Heading2'
 import { AiFillTag } from 'react-icons/ai'
 
+import CategoryText from '@/components/atoms/text/Categorytext'
+
 // type
 import type { BlogType } from '@/types'
 
@@ -52,18 +54,9 @@ const Card = ({
           {tags.length !== 0 && (
             <footer>
               {showCategory && (
-                <StyledCategory>
-                  <IconContext.Provider
-                    value={{ color: '#00ae95', size: '8px' }}
-                  >
-                    <StyledCategoryLink
-                      href={`/blog/category/${category.id}/1`}
-                    >
-                      <StyleAiFillTag />
-                      {category.name}
-                    </StyledCategoryLink>
-                  </IconContext.Provider>
-                </StyledCategory>
+                <StyledCategoryText id={category.id}>
+                  {category.name}
+                </StyledCategoryText>
               )}
 
               <StyledTags>
@@ -112,10 +105,8 @@ const StyledHeading2 = styled(Heading2)`
   margin-top: 12px;
 `
 
-const StyledCategory = styled.p`
+const StyledCategoryText = styled(CategoryText)`
   margin-top: 12px; // atomsになった際に削除
-  font-size: 14px;
-  position: relative;
 `
 const StyledCategoryLink = styled(Link)`
   color: #000;
