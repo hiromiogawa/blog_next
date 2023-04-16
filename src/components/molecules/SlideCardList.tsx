@@ -2,13 +2,12 @@ import styled from 'styled-components'
 
 // components
 import { Splide, SplideSlide } from '@splidejs/react-splide'
-import Card, { CardType } from '../molecules/Card'
+import Card, { CardType } from './Card'
 
 // css
 import '@splidejs/react-splide/css/core'
 
-export type CardListType = {
-  slide?: boolean
+export type SlideCardListType = {
   cardListData: CardType[]
   showCategory?: boolean
 }
@@ -17,7 +16,7 @@ const SlideCardList = ({
   cardListData,
   showCategory = true,
   ...props
-}: CardListType) => {
+}: SlideCardListType) => {
   return (
     <StyledSplidWrap {...props}>
       <Splide

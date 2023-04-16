@@ -10,8 +10,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Layout, { LayoutType } from '@/components/common/Layout'
 import Button1 from '@/components/atoms/button/Button1'
+import SlideBlogList from '@/components/organisms/SlideBlogList'
 
-import SlideCardList from '@/components/organisms/SlideCardList'
+import SlideCardList from '@/components/molecules/SlideCardList'
 
 // types
 import type { BlogType, CategoryType } from '@/types'
@@ -26,25 +27,20 @@ type PropTypes = {
 const Home = ({ blogs, categories }: PropTypes) => {
   return (
     <Layout categories={categories}>
-      {blogs.map((blogData, index) => {
+      {blogs.map((blogData) => {
         if (blogData.data.length === 0) return null
         return (
-          <StyledSection key={blogData.categoryName} index={index}>
-            <StyledHeading>{blogData.categoryName}</StyledHeading>
-            <StyledSlideCardList
-              cardListData={blogData.data}
-              showCategory={blogData.categoryName === 'New' ? true : false}
-            />
-            <StyledButton1
-              href={`/blog${
-                blogData.categoryId === 'new'
-                  ? ''
-                  : `/category/${blogData.categoryId}`
-              }/1`}
-            >
-              more
-            </StyledButton1>
-          </StyledSection>
+          <SlideBlogList
+            key={blogData.categoryName}
+            blogsData={blogData.data}
+            title={blogData.categoryName}
+            listHref={`/blog${
+              blogData.categoryId === 'new'
+                ? ''
+                : `/category/${blogData.categoryId}`
+            }/1`}
+            showCategory={blogData.categoryName === 'New'}
+          />
         )
       })}
     </Layout>
