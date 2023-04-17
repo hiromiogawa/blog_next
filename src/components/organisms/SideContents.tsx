@@ -6,35 +6,23 @@ import Image from 'next/image'
 import Heading1 from '@/components/atoms/text/Heading1'
 import TagText from '@/components/atoms/text/TagText'
 
+import SideCategories, {
+  SideCategoriesType
+} from '@/components/organisms/SideCategories'
+
 import ImgLinkSmall from '@/components/atoms/img/ImgLinkSmall'
 
 // types
-import type { CategoryType, TagType } from '@/types'
+import type { TagType } from '@/types'
 
 export type SideContentsType = {
-  categories: Pick<CategoryType, 'id' | 'name' | 'logo'>[]
   tags: Pick<TagType, 'id' | 'name'>[]
-}
+} & SideCategoriesType
 
 const SideContents = ({ categories, tags }: SideContentsType) => {
   return (
     <StyledAside>
-      <section>
-        <StyledHeading1>CATEGORIES</StyledHeading1>
-        <StyledCategories>
-          {categories.map((category) => (
-            <li key={category.name}>
-              <ImgLinkSmall
-                href={`/blog/${category.id}/1`}
-                src={category.logo.url}
-                alt={category.name}
-                width={category.logo.width}
-                height={category.logo.height}
-              />
-            </li>
-          ))}
-        </StyledCategories>
-      </section>
+      <SideCategories categories={categories} />
       <StyledTagsSection>
         <StyledHeading1>TAGS</StyledHeading1>
         <StyledTags>

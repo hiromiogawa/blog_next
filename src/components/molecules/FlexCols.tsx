@@ -4,7 +4,7 @@ export type FlexColsType = {
   tag?: React.ElementType
   col: number
   gap: number
-  children: React.ReactDOM
+  children: React.ReactNode
 }
 
 const FlexCols = ({
@@ -26,6 +26,7 @@ export default FlexCols
 const StyledFlexCols = styled.ul<Pick<FlexColsType, 'col' | 'gap'>>`
   display: flex;
   gap: ${({ gap }) => `${gap}px`};
+  flex-wrap: wrap;
 
   > * {
     width: ${({ gap, col }) =>
