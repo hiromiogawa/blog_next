@@ -1,15 +1,27 @@
 import styled from 'styled-components'
 
+// hooks
+import { useRef } from 'react'
+import useScrollTrigger from '@/hooks/useScrollTrigger'
+
 // componets
+import MaskAnimation from '@/components/animation/MaskAnimation'
 import TagText, { TagTextType } from '@/components/atoms/text/TagText'
 
 export type TagCardType = TagTextType
 
 const TagCard = ({ id, children, ...props }: TagCardType) => {
+  const elementsRef = useRef(null)
+  const inView = useScrollTrigger(elementsRef)
+
   return (
-    <StyledTagCard {...props} id={id}>
-      {children}
-    </StyledTagCard>
+    <div ref={elementsRef}>
+      <MaskAnimation trigger={inView} backgroundColor="#00AE95">
+        <StyledTagCard {...props} id={id}>
+          {children}
+        </StyledTagCard>
+      </MaskAnimation>
+    </div>
   )
 }
 
@@ -22,6 +34,7 @@ const StyledTagCard = styled(TagText)`
   background-color: #fff;
   border-radius: 12px;
   border: solid 1px #00ae95;
+  margin: 0 0 3px 3px;
   box-shadow: -3px 3px 0px 0px rgba(0, 174, 149, 1);
 
   &:hover {
