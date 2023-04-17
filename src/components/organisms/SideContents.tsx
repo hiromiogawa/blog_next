@@ -6,6 +6,8 @@ import Image from 'next/image'
 import Heading1 from '@/components/atoms/text/Heading1'
 import TagText from '@/components/atoms/text/TagText'
 
+import ImgLinkSmall from '@/components/atoms/img/ImgLinkSmall'
+
 // types
 import type { CategoryType, TagType } from '@/types'
 
@@ -22,16 +24,13 @@ const SideContents = ({ categories, tags }: SideContentsType) => {
         <StyledCategories>
           {categories.map((category) => (
             <li key={category.name}>
-              <StyledLink href={`/blog/${category.id}/1`}>
-                <StyledImageWrap>
-                  <StyledImage
-                    src={category.logo.url}
-                    alt={category.name}
-                    width={category.logo.width}
-                    height={category.logo.height}
-                  />
-                </StyledImageWrap>
-              </StyledLink>
+              <ImgLinkSmall
+                href={`/blog/${category.id}/1`}
+                src={category.logo.url}
+                alt={category.name}
+                width={category.logo.width}
+                height={category.logo.height}
+              />
             </li>
           ))}
         </StyledCategories>
