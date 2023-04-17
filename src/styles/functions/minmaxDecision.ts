@@ -1,7 +1,7 @@
 import { Device } from '@/styles/vars'
 import type { DeviceType } from '@/styles/types'
 
-// minmaxを判定してmaxだったらwidth-1
+/** minmaxを判定してmaxだったら(width - 1)を返す */
 const minmaxDecision = (
   width: number | keyof DeviceType,
   minmax: 'min' | 'max'

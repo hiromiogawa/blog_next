@@ -2,7 +2,10 @@ import minmaxDecision from '@/styles/functions/minmaxDecision'
 import { Device } from '@/styles/vars'
 import type { DeviceType } from '@/styles/types'
 
-// MediaQuery
+/**
+ * MediaQuery
+ * widthがDeviceTypeの場合、minmaxを判定してmaxだったら(width - 1)して返却
+ */
 const mediaQuery = (
   width: number | keyof DeviceType = Device.tb,
   minmax: 'min' | 'max' = 'max'
