@@ -16,14 +16,14 @@ const SideTags = ({ tags, ...props }: SideTagsType) => {
   return (
     <section {...props}>
       <StyledHeading1>TAGS</StyledHeading1>
-      <FlexCols gap={6}>
+      <StyledFlexCols gap={6}>
         {tags.length > 0 &&
           tags.map((tag) => (
             <li key={tag.name}>
               <TagCard id={tag.id}>{tag.name}</TagCard>
             </li>
           ))}
-      </FlexCols>
+      </StyledFlexCols>
     </section>
   )
 }
@@ -32,4 +32,7 @@ export default SideTags
 
 const StyledHeading1 = styled(Heading1)`
   font-size: 20px;
+`
+const StyledFlexCols = styled(FlexCols)`
+  margin-top: 16px;
 `
