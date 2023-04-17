@@ -15,11 +15,9 @@ const TagCard = ({ id, children, ...props }: TagCardType) => {
   const inView = useScrollTrigger(elementsRef)
 
   return (
-    <div ref={elementsRef}>
+    <div ref={elementsRef} {...props}>
       <MaskAnimation trigger={inView} backgroundColor="#00AE95">
-        <StyledTagCard {...props} id={id}>
-          {children}
-        </StyledTagCard>
+        <StyledTagCard id={id}>{children}</StyledTagCard>
       </MaskAnimation>
     </div>
   )

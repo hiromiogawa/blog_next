@@ -12,11 +12,18 @@ import Image, { ImageProps } from 'next/image'
 export type ImgCardSmallType = Pick<LinkProps, 'href'> &
   Pick<ImageProps, 'src' | 'alt' | 'width' | 'height'>
 
-const ImgCardSmall = ({ href, src, alt, width, height }: ImgCardSmallType) => {
+const ImgCardSmall = ({
+  href,
+  src,
+  alt,
+  width,
+  height,
+  ...props
+}: ImgCardSmallType) => {
   const elementsRef = useRef(null)
   const inView = useScrollTrigger(elementsRef)
   return (
-    <div ref={elementsRef}>
+    <div ref={elementsRef} {...props}>
       <MaskAnimation trigger={inView} backgroundColor="#00AE95">
         <StyledLink href={href}>
           <StyledImageWrap>

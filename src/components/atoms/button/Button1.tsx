@@ -1,5 +1,12 @@
 import styled from 'styled-components'
+
+// hooks
+import { useRef } from 'react'
+import useScrollTrigger from '@/hooks/useScrollTrigger'
+
+//components
 import Link from 'next/link'
+import MaskAnimation from '@/components/animation/MaskAnimation'
 
 export type PropTypes = {
   href: string
@@ -7,12 +14,16 @@ export type PropTypes = {
 }
 
 const Button1 = ({ href = '', children = '', ...props }) => {
+  const elementsRef = useRef(null)
+  const inView = useScrollTrigger(elementsRef)
   return (
-    <StyledButton1 {...props}>
-      <Link href={href}>
-        <span>{children}</span>
-      </Link>
-    </StyledButton1>
+    <MaskAnimation trigger={inView} backgroundColor="#00AE95" {...props}>
+      <StyledButton1 ref={elementsRef}>
+        <Link href={href}>
+          <span>{children}</span>
+        </Link>
+      </StyledButton1>
+    </MaskAnimation>
   )
 }
 
