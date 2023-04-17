@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export type FlexColsType = {
   tag?: React.ElementType
-  col: number
+  col?: number
   gap: number
   children: React.ReactNode
 }
@@ -30,6 +30,6 @@ const StyledFlexCols = styled.ul<Pick<FlexColsType, 'col' | 'gap'>>`
 
   > * {
     width: ${({ gap, col }) =>
-      `calc((100% - (${gap}px * ${col - 1})) / ${col})`};
+      col ? `calc((100% - (${gap}px * ${col - 1})) / ${col})` : 'auto'};
   }
 `
