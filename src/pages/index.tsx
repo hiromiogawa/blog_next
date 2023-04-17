@@ -2,7 +2,8 @@ import styled, { css } from 'styled-components'
 import {
   getBlogs,
   getCategories,
-  getBlogsByCategory
+  getBlogsByCategory,
+  getTags
 } from '@/functions/getData'
 
 // components
@@ -24,9 +25,9 @@ type PropTypes = {
     data: Pick<BlogType, 'id' | 'category' | 'createdAt' | 'title' | 'tags'>[]
   }[]
 } & LayoutType
-const Home = ({ blogs, categories }: PropTypes) => {
+const Home = ({ blogs, categories, tags }: PropTypes) => {
   return (
-    <Layout categories={categories}>
+    <Layout categories={categories} tags={tags}>
       {blogs.map((blogData, index) => {
         if (blogData.data.length === 0) return null
         return (
@@ -58,26 +59,11 @@ const StyledSlideBlogList = styled(SlideBlogList)<{ index: number }>`
     `}
 `
 
-const StyledHeading = styled.h1`
-  font-family: 'Bungee Shade';
-  color: #00ae95;
-  font-size: 32px;
-`
-
-const StyledSlideCardList = styled(SlideCardList)`
-  margin-top: 24px;
-`
-
-const StyledButton1 = styled(Button1)`
-  margin-top: 24px;
-`
-
-const StyledAside = styled.aside``
-
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
   const blogsData = await getBlogs(9)
   const categoriesData = await getCategories()
+  const tagsData = await getTags()
   const blogByCategoryData = await Promise.all(
     categoriesData.contents.map(async (category: CategoryType) => {
       const result: { contents: BlogType[] } = await getBlogsByCategory(
@@ -104,7 +90,8 @@ export const getStaticProps = async () => {
   return {
     props: {
       blogs: blogsDataAll,
-      categories: categoriesData.contents
+      categories: categoriesData.contents,
+      tags: tagsData.contents
     }
   }
 }

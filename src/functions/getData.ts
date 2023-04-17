@@ -58,3 +58,14 @@ export const getCategories = async () => {
     contents: data.contents
   }
 }
+
+/** タグ一覧取得 */
+export const getTags = async () => {
+  const data = await client.get({
+    endpoint: 'tags'
+  })
+
+  return {
+    contents: data.contents
+  }
+}

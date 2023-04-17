@@ -29,14 +29,14 @@ export type LayoutType = {
   children: React.ReactNode
 } & SideContentsType
 
-const Layout = ({ children, categories }: LayoutType) => {
+const Layout = ({ children, categories, tags }: LayoutType) => {
   return (
     <>
       <GlobalStyle />
       <HeaderContents />
       <StyledContents>
         <MainContents>{children}</MainContents>
-        <SideContents categories={categories} />
+        <SideContents categories={categories} tags={tags} />
       </StyledContents>
     </>
   )

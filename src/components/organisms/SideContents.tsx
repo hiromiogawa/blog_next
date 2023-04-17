@@ -4,15 +4,17 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import Image from 'next/image'
 import Heading1 from '@/components/atoms/text/Heading1'
+import TagText from '@/components/atoms/text/TagText'
 
 // types
-import type { CategoryType } from '@/types'
+import type { CategoryType, TagType } from '@/types'
 
 export type SideContentsType = {
   categories: Pick<CategoryType, 'id' | 'name' | 'logo'>[]
+  tags: Pick<TagType, 'id' | 'name'>[]
 }
 
-const SideContents = ({ categories }: SideContentsType) => {
+const SideContents = ({ categories, tags }: SideContentsType) => {
   return (
     <StyledAside>
       <section>
@@ -33,6 +35,17 @@ const SideContents = ({ categories }: SideContentsType) => {
             </li>
           ))}
         </StyledUl>
+      </section>
+      <section>
+        <StyledHeading1>TAGS</StyledHeading1>
+        <ul>
+          {tags.length > 0 &&
+            tags.map((tag) => (
+              <li key={tag.name}>
+                <TagText id={tag.id}>{tag.name}</TagText>
+              </li>
+            ))}
+        </ul>
       </section>
     </StyledAside>
   )
