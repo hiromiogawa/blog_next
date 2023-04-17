@@ -3,7 +3,7 @@ import styled from 'styled-components'
 // components
 import Heading1 from '@/components/atoms/text/Heading1'
 import FlexCols from '@/components/molecules/FlexCols'
-import ImgLinkSmall from '@/components/atoms/img/ImgLinkSmall'
+import ImgCardSmall from '@/components/atoms/img/ImgCardSmall'
 
 // types
 import type { CategoryType } from '@/types'
@@ -19,7 +19,7 @@ const SideCategories = ({ categories, ...props }: SideCategoriesType) => {
       <StyledFlexCols col={3} gap={13}>
         {categories.map((category) => (
           <li key={category.name}>
-            <ImgLinkSmall
+            <ImgCardSmall
               href={`/blog/${category.id}/1`}
               src={category.logo.url}
               alt={category.name}

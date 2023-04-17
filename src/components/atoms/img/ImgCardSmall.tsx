@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import Link, { LinkProps } from 'next/link'
 import Image, { ImageProps } from 'next/image'
 
-export type ImgLinkSmallType = Pick<LinkProps, 'href'> &
+export type ImgCardSmallType = Pick<LinkProps, 'href'> &
   Pick<ImageProps, 'src' | 'alt' | 'width' | 'height'>
 
-const ImgLinkSmall = ({ href, src, alt, width, height }: ImgLinkSmallType) => {
+const ImgCardSmall = ({ href, src, alt, width, height }: ImgCardSmallType) => {
   return (
     <StyledLink href={href}>
       <StyledImageWrap>
@@ -17,14 +17,7 @@ const ImgLinkSmall = ({ href, src, alt, width, height }: ImgLinkSmallType) => {
   )
 }
 
-export default ImgLinkSmall
-
-const StyledCategories = styled.ul`
-  display: flex;
-  gap: 13px;
-  flex-wrap: wrap;
-  margin-top: 16px;
-`
+export default ImgCardSmall
 
 const StyledLink = styled(Link)`
   display: flex;
