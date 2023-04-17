@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react'
 import { Device } from '@/styles/vars'
+import minmaxDecision from '@/styles/functions/minmaxDecision'
+import type { DeviceType } from '@/styles/types'
 
 /**
  * メディアクエリのカスタムhook
- * @param minmax - (min|max)の指定
- * @param breakpoint - ブレイクポイント
  */
 const useMediaQuery = (
   minmax: 'min' | 'max' = 'max',
-  breakpoint: number = Device.tb - 1
+  width: number | keyof DeviceType = Device.tb
 ): boolean => {
   const [isMatch, setIsMatch] = useState(() => false)
+  const breakpoint =
+    typeof width === 'string' ? minmaxDecision(width, minmax) : width
 
   useEffect(() => {
     const isMatches = () =>

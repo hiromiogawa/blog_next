@@ -1,5 +1,8 @@
 import { useEffect, useState, RefObject } from 'react'
 
+/**
+ * 指定されたHTML要素が表示領域内にスクロールされたかどうかを監視するカスタムReactフックです。
+ */
 export const useScrollTrigger = (
   ref: RefObject<HTMLElement>,
   startPosition: number = 0
