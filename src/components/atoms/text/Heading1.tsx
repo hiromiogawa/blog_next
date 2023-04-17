@@ -6,9 +6,9 @@ export type Heading1Type = {
   children: string
 }
 
-const Heading1 = ({ tag, children }: Heading1Type) => {
+const Heading1 = ({ tag, children, ...props }: Heading1Type) => {
   return (
-    <StyledHeading as={tag}>
+    <StyledHeading as={tag} {...props}>
       <Text>{children}</Text>
     </StyledHeading>
   )

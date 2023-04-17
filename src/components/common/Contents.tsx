@@ -10,8 +10,8 @@ const Contents = ({ children, ...props }: PropTypes) => {
 
 export default Contents
 
-const StyledContents = styled.main`
-  max-width: 1264px;
+const StyledContents = styled.div`
+  max-width: 1136px;
   padding: 0 32px;
   margin: 0 auto;
   width: 100%;
