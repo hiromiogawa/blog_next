@@ -40,12 +40,6 @@ const SlideBlogList = ({
 
 export default SlideBlogList
 
-const StyledHeading = styled.h1`
-  font-family: 'Bungee Shade';
-  color: #00ae95;
-  font-size: 32px;
-`
-
 const StyledSlideCardList = styled(SlideCardList)`
   margin-top: 24px;
 `
