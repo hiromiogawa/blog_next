@@ -39,7 +39,7 @@ const SlideCardList = ({
           rewind: true,
           perPage: perPage,
           gap: '24px',
-          pagination: false,
+          pagination: isTb,
           drag: 'free',
           omitEnd: true,
           arrows: !isTb ? cardListData.length > 3 : false
@@ -110,6 +110,33 @@ const StyledSplidWrap = styled.div`
       &:hover {
         transform: rotate(180deg) translate(2px, -2px);
         box-shadow: 0px 0px 0px 0px rgba(0, 174, 149, 1);
+      }
+    }
+  }
+
+  .splide__pagination {
+    margin-top: 12px;
+    gap: 4px;
+
+    &__page {
+      border-radius: 3px;
+      background-color: #fff;
+      border: solid 1px #00ae95;
+      padding: 0;
+      width: 10px;
+      height: 10px;
+      box-shadow: -1px 1px 0px 0px rgba(0, 174, 149, 1);
+      margin: 0 0 1px 1px;
+      transition: transform 0.5s box-shadow 0.5s;
+
+      &:hover,
+      &.is-active {
+        transform: translate(-1px, 1px);
+        box-shadow: 0px 0px 0px 0px rgba(0, 174, 149, 1);
+      }
+
+      &.is-active {
+        background-color: #00ae95;
       }
     }
   }
