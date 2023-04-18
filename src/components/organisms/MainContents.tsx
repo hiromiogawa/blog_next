@@ -1,4 +1,8 @@
 import styled from 'styled-components'
+import { Device } from '@/styles/vars'
+
+// functions
+import mediaQuery from '@/styles/functions/mediaQuery'
 
 type PropTypes = {
   tag?: React.ElementType
@@ -20,4 +24,12 @@ const StyledMain = styled.main`
   padding: 0 32px;
   margin: 0 auto;
   width: 100%;
+
+  ${mediaQuery(Device.ct)} {
+    padding: 0;
+  }
+
+  ${mediaQuery(Device.tb)} {
+    padding: 0 16px;
+  }
 `

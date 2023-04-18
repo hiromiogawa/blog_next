@@ -1,4 +1,8 @@
 import styled from 'styled-components'
+import { Device } from '@/styles/vars'
+
+// funtions
+import mediaQuery from '@/styles/functions/mediaQuery'
 
 // components
 import SideCategories, {
@@ -24,6 +28,12 @@ const StyledAside = styled.aside`
   max-width: 176px;
   width: 100%;
   margin-left: 32px;
+
+  ${mediaQuery(Device.ct)} {
+    max-width: 864px;
+    padding: 0;
+    margin: 80px auto 0;
+  }
 `
 
 const StyledSideTags = styled(SideTags)`

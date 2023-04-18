@@ -16,7 +16,7 @@ const SideCategories = ({ categories, ...props }: SideCategoriesType) => {
   return (
     <section {...props}>
       <StyledHeading1>CATEGORIES</StyledHeading1>
-      <StyledFlexCols col={3} gap={13}>
+      <StyledFlexCols gap={8}>
         {categories.map((category) => (
           <li key={category.name}>
             <ImgCardSmall

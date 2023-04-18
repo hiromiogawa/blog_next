@@ -1,6 +1,9 @@
 import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
+// functions
+import mediaQuery from '@/styles/functions/mediaQuery'
+
 // components
 import HeaderContents from '@/components/organisms/HeaderContents'
 import Contents from '@/components/common/Contents'
@@ -50,4 +53,8 @@ const StyledContents = styled(Contents)`
   display: flex;
   justify-content: center;
   margin-top: 56px;
+
+  ${mediaQuery('ct')} {
+    display: block;
+  }
 `

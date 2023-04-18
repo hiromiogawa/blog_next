@@ -19,7 +19,7 @@ export default FooterContents
 
 const StyledFooter = styled.footer`
   padding: 24px 0;
-  margin-top: 120px;
+  margin-top: 80px;
   background-color: #00ae95;
 `
 

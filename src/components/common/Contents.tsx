@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Device } from '@/styles/vars'
 
 type PropTypes = {
   children: React.ReactNode
@@ -11,7 +12,7 @@ const Contents = ({ children, ...props }: PropTypes) => {
 export default Contents
 
 const StyledContents = styled.div`
-  max-width: 1136px;
+  max-width: ${Device.ct}px;
   padding: 0 32px;
   margin: 0 auto;
   width: 100%;
