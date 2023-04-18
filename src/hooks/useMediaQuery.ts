@@ -7,8 +7,8 @@ import type { DeviceType } from '@/styles/types'
  * メディアクエリのカスタムhook
  */
 const useMediaQuery = (
-  minmax: 'min' | 'max' = 'max',
-  width: number | keyof DeviceType = Device.tb
+  width: number | keyof DeviceType = Device.tb,
+  minmax: 'min' | 'max' = 'max'
 ): boolean => {
   const [isMatch, setIsMatch] = useState(() => false)
   const breakpoint =

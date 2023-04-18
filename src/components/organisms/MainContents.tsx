@@ -30,6 +30,5 @@ const StyledMain = styled.main`
   }
 
   ${mediaQuery(Device.tb)} {
-    padding: 0 16px;
   }
 `

@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { Device } from '@/styles/vars'
 
+// functions
+import mediaQuery from '@/styles/functions/mediaQuery'
+
 type PropTypes = {
   children: React.ReactNode
 }
@@ -16,4 +19,8 @@ const StyledContents = styled.div`
   padding: 0 32px;
   margin: 0 auto;
   width: 100%;
+
+  ${mediaQuery(Device.tb)} {
+    padding: 0 16px;
+  }
 `
