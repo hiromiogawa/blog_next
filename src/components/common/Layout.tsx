@@ -8,6 +8,7 @@ import MainContents from '@/components/organisms/MainContents'
 import SideContents, {
   SideContentsType
 } from '@/components/organisms/SideContents'
+import FooterContents from '@/components/organisms/FooterContents'
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -38,6 +39,7 @@ const Layout = ({ children, categories, tags }: LayoutType) => {
         <MainContents>{children}</MainContents>
         <SideContents categories={categories} tags={tags} />
       </StyledContents>
+      <FooterContents />
     </>
   )
 }
