@@ -12,7 +12,7 @@ const VerticalCardList = ({ CardListData, ...props }: CardListType) => {
     <StyledUl {...props}>
       {CardListData.map((CardData) => (
         <li key={CardData.title}>
-          <Card {...CardData} />
+          <Card {...CardData} vertical />
         </li>
       ))}
     </StyledUl>

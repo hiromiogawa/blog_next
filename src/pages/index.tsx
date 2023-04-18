@@ -14,11 +14,11 @@ import SlideBlogLists, {
 import type { BlogType, CategoryType } from '@/types'
 
 type PropTypes = SlideBlogListsType
-const Home = ({ ...props }: PropTypes) => {
+const TopPage = ({ ...props }: PropTypes) => {
   return <SlideBlogLists {...props} />
 }
 
-export default Home
+export default TopPage
 
 export const getStaticProps = async () => {
   const blogsData = await getBlogs(9)

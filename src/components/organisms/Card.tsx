@@ -8,7 +8,7 @@ import useScrollTrigger from '@/hooks/useScrollTrigger'
 import Link from 'next/link'
 import MaskAnimation from '@/components/animation/MaskAnimation'
 import CardHeader from '@/components/molecules/CardHeader'
-import Heading2 from '@/components/atoms/text/Heading2'
+import Heading2, { Heading2Type } from '@/components/atoms/text/Heading2'
 import CardFooter, { CardFooterType } from '@/components/molecules/CardFooter'
 
 // type
@@ -19,7 +19,8 @@ export type CardType = Pick<
   BlogType,
   'id' | 'category' | 'createdAt' | 'title' | 'tags'
 > &
-  Pick<CardFooterType, 'showCategory'>
+  Pick<CardFooterType, 'showCategory'> &
+  Pick<Heading2Type, 'vertical'>
 
 // 一覧のCardコンポーネント
 const Card = ({
@@ -28,7 +29,8 @@ const Card = ({
   createdAt,
   title,
   tags,
-  showCategory = true
+  showCategory = true,
+  vertical = false
 }: CardType) => {
   const elementsRef = useRef(null)
   const inView = useScrollTrigger(elementsRef)
@@ -40,7 +42,7 @@ const Card = ({
           <StyledCardLink href={`/blog/detail/${id}`} />
           <CardHeader createdAt={createdAt} />
           <Link href={`/blog/detail/${id}`}>
-            <StyledHeading2>{title}</StyledHeading2>
+            <StyledHeading2 vertical={vertical}>{title}</StyledHeading2>
           </Link>
           {(tags.length !== 0 || showCategory) && (
             <StyledCardFooter

@@ -1,3 +1,10 @@
+import type { ParsedUrlQuery } from 'node:querystring'
+
+/** 一覧ページのgetStaticPropsで使用するcontext型宣言 */
+export type ParamsType = ParsedUrlQuery & {
+  page: string
+}
+
 /** カテゴリ */
 export type CategoryType = {
   id: string
@@ -36,7 +43,7 @@ export type BlogType = {
 }
 
 /** レスポンスデータ */
-export type ResData = {
+export type ResDataType = {
   totalCount: number
   offset: number
   limit: number

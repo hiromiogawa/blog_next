@@ -1,14 +1,20 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Text from '@/components/elements/Text'
 
 export type Heading2Type = {
   tag?: React.ElementType
   children: string
+  vertical?: boolean
 }
 
-const Heading2 = ({ tag, children, ...props }: Heading2Type) => {
+const Heading2 = ({
+  tag,
+  children,
+  vertical = false,
+  ...props
+}: Heading2Type) => {
   return (
-    <StyledHeading as={tag} {...props}>
+    <StyledHeading as={tag} {...props} vertical={vertical}>
       <Text>{children}</Text>
     </StyledHeading>
   )
@@ -16,11 +22,15 @@ const Heading2 = ({ tag, children, ...props }: Heading2Type) => {
 
 export default Heading2
 
-const StyledHeading = styled.h2`
+const StyledHeading = styled.h2<Pick<Heading2Type, 'vertical'>>`
   color: #000;
   font-size: 16px;
   line-height: 1.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  ${({ vertical }) =>
+    !vertical &&
+    css`
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    `}
 `

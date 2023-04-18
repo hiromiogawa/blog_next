@@ -29,7 +29,7 @@ const SlideBlogLists = ({ blogs, categories, tags }: SlideBlogListsType) => {
                 ? ''
                 : `/category/${blogData.categoryId}`
             }/1`}
-            showCategory={blogData.categoryName === 'New'}
+            showCategory={blogData.categoryId === 'new'}
             index={index}
           />
         )
