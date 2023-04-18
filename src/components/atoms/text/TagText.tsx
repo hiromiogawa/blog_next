@@ -22,6 +22,7 @@ export default TagText
 
 const StyledTagText = styled(Link)`
   color: #000;
+  font-family: 'Zen Maru Gothic', sans-serif;
 
   &:hover {
     color: #00ae95;
