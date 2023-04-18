@@ -21,7 +21,7 @@ const CardFooter = ({
   return (
     <footer {...props}>
       {showCategory && (
-        <CategoryText id={category.id}>{category.name}</CategoryText>
+        <StyleCategoryText id={category.id}>{category.name}</StyleCategoryText>
       )}
       <StyledTagList tags={tags} showCategory={showCategory} />
     </footer>
@@ -32,4 +32,8 @@ export default CardFooter
 
 const StyledTagList = styled(TagList)<{ showCategory: boolean }>`
   margin-top: ${({ showCategory }) => (showCategory ? '8px' : 0)};
+`
+
+const StyleCategoryText = styled(CategoryText)`
+  margin-top: 12px; // atomsになった際に削除
 `

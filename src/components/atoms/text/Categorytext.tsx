@@ -30,9 +30,9 @@ const CategoryText = ({ id, children, ...props }: CategoryTextType) => {
 export default CategoryText
 
 const StyledCategory = styled.p`
-  margin-top: 12px; // atomsになった際に削除
   font-size: 14px;
   position: relative;
+  font-family: 'Zen Maru Gothic', sans-serif;
 `
 const StyledCategoryLink = styled(Link)`
   color: #000;
