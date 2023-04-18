@@ -7,17 +7,13 @@ import ReactPaginate from 'react-paginate'
 
 export type PagiNationType = {
   totalCount: number
-  category?: string
+  sortId?: string
 }
 
-const PagiNation = ({
-  totalCount,
-  category = '',
-  ...props
-}: PagiNationType) => {
+const PagiNation = ({ totalCount, sortId = '', ...props }: PagiNationType) => {
   const handlePaginate = (selectedItem: { selected: number }) => {
     Router.push(
-      `/blog${category ? `/${category}` : ''}/${selectedItem.selected + 1}`
+      `/blog${sortId ? `/${sortId}` : ''}/${selectedItem.selected + 1}`
     )
   }
   return (

@@ -15,13 +15,14 @@ export type VerticalCardListsType = {
   blogs: BlogType[]
   categories: CategoryType[]
   tags: TagType[]
-} & Pick<PagiNationType, 'totalCount'>
+} & PagiNationType
 
 const VerticalCardLists = ({
   blogs,
   categories,
   tags,
-  totalCount
+  totalCount,
+  sortId
 }: VerticalCardListsType) => {
   // blogsをcardListのデータに変換
   const cardListData = getCardListData(blogs)
@@ -29,7 +30,7 @@ const VerticalCardLists = ({
   return (
     <Layout categories={categories} tags={tags}>
       <VerticalCardList CardListData={cardListData} />
-      <StyledPaginate totalCount={totalCount} />
+      <StyledPaginate totalCount={totalCount} sortId={sortId} />
     </Layout>
   )
 }

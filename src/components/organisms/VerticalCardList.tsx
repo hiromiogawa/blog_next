@@ -3,11 +3,11 @@ import styled from 'styled-components'
 // components
 import Card, { CardType } from './Card'
 
-export type CardListType = {
+export type VerticalCardListType = {
   CardListData: CardType[]
 }
 
-const VerticalCardList = ({ CardListData, ...props }: CardListType) => {
+const VerticalCardList = ({ CardListData, ...props }: VerticalCardListType) => {
   return (
     <StyledUl {...props}>
       {CardListData.map((CardData) => (
