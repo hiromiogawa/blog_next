@@ -1,56 +1,23 @@
-import styled from 'styled-components'
-import Router from 'next/router'
 import { PER_PAGE, MAX_LIMIT } from '@/config'
-import ReactPaginate from 'react-paginate'
 
 // functions
 import { getBlogs, getCategories, getTags } from '@/functions/getData'
 import getRange from '@/functions/getRange'
-import getCardListData from '@/functions/getCardListData'
 
 // components
-import Layout from '@/components/common/Layout'
-import VerticalCardList from '@/components/organisms/VerticalCardList'
-import PagiNation, { PagiNationType } from '@/components/molecules/PagiNation'
+import VerticalCardLists, {
+  VerticalCardListsType
+} from '@/components/templates/VerticalCardLists'
 
 // types
 import type { GetStaticProps } from 'next'
-import type {
-  BlogType,
-  CategoryType,
-  TagType,
-  ResDataType,
-  ParamsType
-} from '@/types'
+import type { BlogType, ResDataType, ParamsType } from '@/types'
 
-export type BlogListType = {
-  blogs: BlogType[]
-  categories: CategoryType[]
-  tags: TagType[]
-} & Pick<PagiNationType, 'totalCount'>
-
-const BlogListPage = ({
-  blogs,
-  categories,
-  tags,
-  totalCount
-}: BlogListType) => {
-  // blogsをcardListのデータに変換
-  const cardListData = getCardListData(blogs)
-
-  return (
-    <Layout categories={categories} tags={tags}>
-      <VerticalCardList CardListData={cardListData} />
-      <StyledPaginate totalCount={totalCount} />
-    </Layout>
-  )
+const BlogListPage = ({ ...props }: VerticalCardListsType) => {
+  return <VerticalCardLists {...props} />
 }
 
 export default BlogListPage
-
-const StyledPaginate = styled(PagiNation)`
-  margin-top: 40px;
-`
 
 // 動的なページを作成
 export const getStaticPaths = async () => {
@@ -66,9 +33,10 @@ export const getStaticPaths = async () => {
 }
 
 // データを取得
-export const getStaticProps: GetStaticProps<BlogListType, ParamsType> = async (
-  context
-) => {
+export const getStaticProps: GetStaticProps<
+  VerticalCardListsType,
+  ParamsType
+> = async (context) => {
   const categoriesData = await getCategories()
   const tagsData = await getTags()
   const blogsData = await getBlogs(
