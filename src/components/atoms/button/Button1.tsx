@@ -17,17 +17,23 @@ const Button1 = ({ href = '', children = '', ...props }) => {
   const elementsRef = useRef(null)
   const inView = useScrollTrigger(elementsRef)
   return (
-    <MaskAnimation trigger={inView} backgroundColor="#00AE95" {...props}>
-      <StyledButton1 ref={elementsRef}>
-        <Link href={href}>
-          <span>{children}</span>
-        </Link>
-      </StyledButton1>
-    </MaskAnimation>
+    <div {...props}>
+      <StyledMaskAnimation trigger={inView} backgroundColor="#00AE95">
+        <StyledButton1 ref={elementsRef}>
+          <Link href={href}>
+            <span>{children}</span>
+          </Link>
+        </StyledButton1>
+      </StyledMaskAnimation>
+    </div>
   )
 }
 
 export default Button1
+
+const StyledMaskAnimation = styled(MaskAnimation)`
+  display: inline-block;
+`
 
 const StyledButton1 = styled.div`
   font-family: 'Raleway';
