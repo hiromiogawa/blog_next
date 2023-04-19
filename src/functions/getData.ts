@@ -45,6 +45,31 @@ export const getBlogsByCategory = async (
   }
 }
 
+/** タグ別記事一覧取得 */
+export const getBlogsByTag = async (
+  tagId: string,
+  limit = PER_PAGE,
+  offset = 0,
+  orders = '-createdAt'
+) => {
+  const data = await client.get({
+    endpoint: 'blogs',
+    queries: {
+      limit: limit,
+      offset: offset,
+      orders: orders,
+      filters: `tags[contains]${tagId}`
+    }
+  })
+
+  return {
+    contents: data.contents,
+    totalCount: data.totalCount,
+    offset: data.offset,
+    limit: data.limit
+  }
+}
+
 /** 記事詳細取得 */
 export const getBlog = async (id: string) => {
   const data = await client.get({ endpoint: 'blogs', contentId: id })
