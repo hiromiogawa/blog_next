@@ -11,7 +11,7 @@ import VerticalCardLists, {
 
 // types
 import type { GetStaticProps } from 'next'
-import type { BlogType, CategoryType, ResDataType, ParamsType } from '@/types'
+import type { CategoryType, ResDataType, ParamsType } from '@/types'
 
 const BlogListPage = ({ ...props }: VerticalCardListsType) => {
   return <VerticalCardLists {...props} />
