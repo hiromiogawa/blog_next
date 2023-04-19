@@ -38,7 +38,10 @@ export const getBlogsByCategory = async (
   })
 
   return {
-    contents: data.contents
+    contents: data.contents,
+    totalCount: data.totalCount,
+    offset: data.offset,
+    limit: data.limit
   }
 }
 
