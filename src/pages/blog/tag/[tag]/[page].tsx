@@ -1,7 +1,7 @@
 import { PER_PAGE, MAX_LIMIT } from '@/config'
 
 // functions
-import { getBlogsByTag, getCategories, getTags } from '@/functions/getData'
+import { getBlogsByTags, getCategories, getTags } from '@/functions/getData'
 import getRange from '@/functions/getRange'
 
 // components
@@ -25,7 +25,7 @@ export const getStaticPaths = async () => {
 
   const resPaths = await Promise.all(
     tags.contents.map(async (tag) => {
-      const blogs: ResDataType = await getBlogsByTag(tag.id, MAX_LIMIT)
+      const blogs: ResDataType = await getBlogsByTags(tag.id, MAX_LIMIT)
 
       return getRange(1, Math.ceil(blogs.totalCount / PER_PAGE)).map(
         (repo) => `/blog/tag/${tag.id}/${repo}`
@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps<
 > = async (context) => {
   const categoriesData = await getCategories()
   const tagsData = await getTags()
-  const blogsData = await getBlogsByTag(
+  const blogsData = await getBlogsByTags(
     context.params!.tag,
     PER_PAGE,
     (Number(context.params!.page) - 1) * PER_PAGE

@@ -46,7 +46,7 @@ export const getBlogsByCategory = async (
 }
 
 /** タグ別記事一覧取得 */
-export const getBlogsByTag = async (
+export const getBlogsByTags = async (
   tagId: string,
   limit = PER_PAGE,
   offset = 0,
