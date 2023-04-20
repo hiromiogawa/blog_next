@@ -1,24 +1,34 @@
-import { PER_PAGE, MAX_LIMIT } from '@/config'
+import { MAX_LIMIT } from '@/config'
 
 import type { ParsedUrlQuery } from 'node:querystring'
 
 // functions
 import { getBlog, getBlogs, getCategories, getTags } from '@/functions/getData'
-import getRange from '@/functions/getRange'
 
 // components
+import Layout, { LayoutType } from '@/components/common/Layout'
+import Html from '@/components/elements/Html'
 
 // types
 import type { GetStaticProps } from 'next'
 import type { BlogType, ResDataType } from '@/types'
 
 /** 一覧ページのgetStaticPropsで使用するcontext型宣言 */
-export type ParamsType = ParsedUrlQuery & {
+type ParamsType = ParsedUrlQuery & {
   id: string
 }
 
-const Detail = ({ blog, categories, tags }) => {
-  return null
+export type PropTypes = {
+  blog: BlogType
+} & LayoutType
+
+const Detail = ({ blog, categories, tags }: PropTypes) => {
+  console.log(blog)
+  return (
+    <Layout categories={categories} tags={tags}>
+      <Html>{blog.content}</Html>
+    </Layout>
+  )
 }
 
 export default Detail
