@@ -65,7 +65,7 @@ const StyledCard = styled.article`
   border-radius: 12px;
   cursor: pointer;
   padding: 16px;
-  border: solid 1px #00ae95;
+  border: solid 3px #00ae95;
   box-shadow: -5px 5px 0px 0px rgba(0, 174, 149, 1);
   margin: 0 0 5px 5px;
   transition: transform 0.5s box-shadow 0.5s;

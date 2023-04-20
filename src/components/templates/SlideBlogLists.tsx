@@ -17,7 +17,7 @@ export type SlideBlogListsType = {
 const SlideBlogLists = ({ blogs, categories, tags }: SlideBlogListsType) => {
   return (
     <Layout categories={categories} tags={tags}>
-      {blogs.map((blogData, index) => {
+      {blogs.map((blogData) => {
         if (blogData.data.length === 0) return null
         return (
           <StyledSlideBlogList
@@ -30,7 +30,6 @@ const SlideBlogLists = ({ blogs, categories, tags }: SlideBlogListsType) => {
                 : `/category/${blogData.categoryId}`
             }/1`}
             showCategory={blogData.categoryId === 'new'}
-            index={index}
           />
         )
       })}
@@ -40,10 +39,8 @@ const SlideBlogLists = ({ blogs, categories, tags }: SlideBlogListsType) => {
 
 export default SlideBlogLists
 
-const StyledSlideBlogList = styled(SlideBlogList)<{ index: number }>`
-  ${({ index }) =>
-    index > 0 &&
-    css`
-      margin-top: 80px;
-    `}
+const StyledSlideBlogList = styled(SlideBlogList)`
+  & + & {
+    margin-top: 80px;
+  }
 `

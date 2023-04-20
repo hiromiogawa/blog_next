@@ -46,7 +46,7 @@ const StyledReactPaginate = styled(ReactPaginate)`
       width: 100%;
       height: 100%;
       background-color: #fff;
-      border: solid 1px #00ae95;
+      border: solid 3px #00ae95;
       font-family: 'Bungee Shade';
       color: #00ae95;
       box-shadow: -2px 2px 0px 0px rgba(0, 174, 149, 1);

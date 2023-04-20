@@ -45,7 +45,7 @@ const StyledLink = styled(Link)`
   background: #fff;
   border-radius: 12px;
   margin: 0 0 3px 3px;
-  border: solid 1px #00ae95;
+  border: solid 3px #00ae95;
   box-shadow: -3px 3px 0px 0px rgba(0, 174, 149, 1);
 
   &:hover {
