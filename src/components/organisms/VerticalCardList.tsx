@@ -4,15 +4,19 @@ import styled from 'styled-components'
 import Card, { CardType } from './Card'
 
 export type VerticalCardListType = {
-  CardListData: CardType[]
-}
+  cardListData: CardType[]
+} & Pick<CardType, 'showFooter'>
 
-const VerticalCardList = ({ CardListData, ...props }: VerticalCardListType) => {
+const VerticalCardList = ({
+  cardListData,
+  showFooter = true,
+  ...props
+}: VerticalCardListType) => {
   return (
     <StyledUl {...props}>
-      {CardListData.map((CardData) => (
-        <li key={CardData.title}>
-          <Card {...CardData} vertical />
+      {cardListData.map((cardData) => (
+        <li key={cardData.title}>
+          <Card {...cardData} vertical showFooter={showFooter} />
         </li>
       ))}
     </StyledUl>

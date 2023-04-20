@@ -20,7 +20,9 @@ export type CardType = Pick<
   'id' | 'category' | 'createdAt' | 'title' | 'tags'
 > &
   Pick<CardFooterType, 'showCategory'> &
-  Pick<Heading2Type, 'vertical'>
+  Pick<Heading2Type, 'vertical'> & {
+    showFooter?: boolean
+  }
 
 // 一覧のCardコンポーネント
 const Card = ({
@@ -30,6 +32,7 @@ const Card = ({
   title,
   tags,
   showCategory = true,
+  showFooter = true,
   vertical = false
 }: CardType) => {
   const elementsRef = useRef(null)
@@ -44,7 +47,7 @@ const Card = ({
           <Link href={`/blog/detail/${id}`}>
             <StyledHeading2 vertical={vertical}>{title}</StyledHeading2>
           </Link>
-          {(tags.length !== 0 || showCategory) && (
+          {showFooter && (tags.length !== 0 || showCategory) && (
             <StyledCardFooter
               tags={tags}
               category={category}

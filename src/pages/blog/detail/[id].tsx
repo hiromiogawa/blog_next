@@ -38,7 +38,6 @@ const Detail = ({ blog, categories, tags }: PropTypes) => {
   const isTb = useMediaQuery('tb')
   const cardListData = getCardListData(blog.connections)
 
-  console.log(cardListData)
   return (
     <Layout categories={categories} tags={tags}>
       <StyledDetail>
@@ -66,9 +65,12 @@ const Detail = ({ blog, categories, tags }: PropTypes) => {
       <StyledRelated>
         <StyledHeading1>Related article</StyledHeading1>
         {isTb ? (
-          <StyledVerticalCardList CardListData={cardListData} />
+          <StyledVerticalCardList
+            showFooter={false}
+            cardListData={cardListData}
+          />
         ) : (
-          <StyledSlideCardList cardListData={cardListData} />
+          <StyledSlideCardList showFooter={false} cardListData={cardListData} />
         )}
       </StyledRelated>
     </Layout>

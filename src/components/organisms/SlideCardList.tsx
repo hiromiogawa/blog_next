@@ -14,12 +14,12 @@ import '@splidejs/react-splide/css/core'
 
 export type SlideCardListType = {
   cardListData: CardType[]
-  showCategory?: boolean
-}
+} & Pick<CardType, 'showCategory' | 'showFooter'>
 
 const SlideCardList = ({
   cardListData,
   showCategory = true,
+  showFooter = true,
   ...props
 }: SlideCardListType) => {
   const [perPage, setPerPage] = useState(3)
@@ -47,7 +47,11 @@ const SlideCardList = ({
       >
         {cardListData.map((cardData) => (
           <SplideSlide key={cardData.title}>
-            <Card {...cardData} showCategory={showCategory} />
+            <Card
+              {...cardData}
+              showCategory={showCategory}
+              showFooter={showFooter}
+            />
           </SplideSlide>
         ))}
       </Splide>
