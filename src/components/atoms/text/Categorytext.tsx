@@ -12,12 +12,18 @@ import type { CategoryType } from '@/types'
 
 export type CategoryTextType = Pick<CategoryType, 'id'> & {
   children: CategoryType['name']
+  size?: string
 }
 
-const CategoryText = ({ id, children, ...props }: CategoryTextType) => {
+const CategoryText = ({
+  id,
+  children,
+  size = '8px',
+  ...props
+}: CategoryTextType) => {
   return (
     <StyledCategory {...props}>
-      <IconContext.Provider value={{ color: '#00ae95', size: '8px' }}>
+      <IconContext.Provider value={{ color: '#00ae95', size: size }}>
         <StyledCategoryLink href={`/blog/category/${id}/1`}>
           <StyleAiFillTag />
           {children}

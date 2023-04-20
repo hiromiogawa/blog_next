@@ -1,18 +1,29 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { MAX_LIMIT } from '@/config'
+import { Device } from '@/styles/vars'
 
-import type { ParsedUrlQuery } from 'node:querystring'
+// hooks
+import useMediaQuery from '@/hooks/useMediaQuery'
 
 // functions
 import { getBlog, getBlogs, getCategories, getTags } from '@/functions/getData'
+import mediaQuery from '@/styles/functions/mediaQuery'
+import getCardListData from '@/functions/getCardListData'
 
 // components
 import Layout, { LayoutType } from '@/components/common/Layout'
+import DayTime1 from '@/components/atoms/text/DayTime1'
+import TagList from '@/components/molecules/TagList'
+import CategoryText from '@/components/atoms/text/CategoryText'
 import Html from '@/components/elements/Html'
+import Heading1 from '@/components/atoms/text/Heading1'
+import SlideCardList from '@/components/organisms/SlideCardList'
+import VerticalCardList from '@/components/organisms/VerticalCardList'
 
 // types
 import type { GetStaticProps } from 'next'
 import type { BlogType, ResDataType } from '@/types'
+import type { ParsedUrlQuery } from 'node:querystring'
 
 /** 一覧ページのgetStaticPropsで使用するcontext型宣言 */
 type ParamsType = ParsedUrlQuery & {
@@ -24,18 +35,134 @@ export type PropTypes = {
 } & LayoutType
 
 const Detail = ({ blog, categories, tags }: PropTypes) => {
+  const isTb = useMediaQuery('tb')
+  const cardListData = getCardListData(blog.connections)
+
+  console.log(cardListData)
   return (
     <Layout categories={categories} tags={tags}>
-      <StyledContent>
-        <Html>{blog.content}</Html>
-      </StyledContent>
+      <StyledDetail>
+        <StyledMeta>
+          <StyledCategoryText size="12px" id={blog.category.id}>
+            {blog.category.name}
+          </StyledCategoryText>
+          <StyledDay>
+            <li>
+              投稿日: <StyledDayTime1>{blog.createdAt}</StyledDayTime1>
+            </li>
+            <li>
+              更新日: <StyledDayTime1>{blog.updatedAt}</StyledDayTime1>
+            </li>
+          </StyledDay>
+          <StyledTitle>{blog.title}</StyledTitle>
+          <StyledTagList tags={blog.tags} />
+        </StyledMeta>
+
+        <StyledContent>
+          <Html>{blog.content}</Html>
+        </StyledContent>
+      </StyledDetail>
+
+      <StyledRelated>
+        <StyledHeading1>Related article</StyledHeading1>
+        {isTb ? (
+          <StyledVerticalCardList CardListData={cardListData} />
+        ) : (
+          <StyledSlideCardList cardListData={cardListData} />
+        )}
+      </StyledRelated>
     </Layout>
   )
 }
 
 export default Detail
 
+const StyledDetail = styled.section`
+  font-family: 'Zen Maru Gothic', sans-serif;
+  background-color: #fff;
+  margin: 0 -32px;
+  padding: 32px;
+  border-radius: 12px;
+  border: solid 3px #00ae95;
+  ${mediaQuery(Device.tb)} {
+    margin: 0 -16px;
+  }
+`
+
+const StyledTitle = styled.h1`
+  margin-top: 8px;
+  font-size: 32px;
+  background: #00ae95;
+  color: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  line-height: 1.4;
+
+  ${mediaQuery(Device.tb)} {
+    font-size: 28px;
+    padding: 6px;
+  }
+`
+
+const StyledMeta = styled.div`
+  font-size: 16px;
+`
+
+const StyledDay = styled.ul`
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -1em;
+  gap: 8px;
+  ${mediaQuery(Device.tb)} {
+    justify-content: flex-start;
+    margin-top: 4px;
+    font-size: 14px;
+  }
+  ${mediaQuery(Device.sp)} {
+    display: block;
+
+    > *:not(:first-child) {
+      margin-top: 4px;
+    }
+  }
+`
+
+const StyledCategoryText = styled(CategoryText)`
+  font-size: 16px;
+
+  a {
+    color: #00ae95;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`
+
+const StyledDayTime1 = styled(DayTime1)`
+  font-size: 16px;
+`
+
+const StyledTagList = styled(TagList)`
+  margin-top: 4px;
+  font-size: 14x;
+
+  a {
+    color: #00ae95;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`
+
 const StyledContent = styled.div`
+  margin-top: 40px;
+
+  ${mediaQuery(Device.tb)} {
+    margin-top: 32px;
+  }
   > * {
     line-height: 1.6;
 
@@ -48,7 +175,6 @@ const StyledContent = styled.div`
     }
   }
 
-  font-family: 'Zen Maru Gothic', sans-serif;
   /* 見出し */
   h1,
   h2,
@@ -67,6 +193,11 @@ const StyledContent = styled.div`
     border-radius: 12px;
     border: solid 3px #00ae95;
 
+    ${mediaQuery(Device.tb)} {
+      font-size: 28px;
+      padding: 6px;
+    }
+
     & + * {
       margin-top: 24px;
     }
@@ -76,6 +207,10 @@ const StyledContent = styled.div`
     margin-top: 48px;
     font-size: 28px;
     border-bottom: double 5px #00ae95;
+    ${mediaQuery(Device.tb)} {
+      font-size: 24px;
+    }
+
     & + * {
       margin-top: 20px;
     }
@@ -88,18 +223,28 @@ const StyledContent = styled.div`
     color: #00ae95;
     background: transparent;
     border-left: solid 5px #00ae95;
+    ${mediaQuery(Device.tb)} {
+      font-size: 20px;
+      padding: 2px 2px;
+    }
   }
 
   h4 {
     margin-top: 24px;
     font-size: 20px;
     border-bottom: solid 3px #00ae95;
+    ${mediaQuery(Device.tb)} {
+      font-size: 18px;
+    }
   }
 
   h5 {
     margin-top: 20px;
     font-size: 18px;
     color: #00ae95;
+    ${mediaQuery(Device.tb)} {
+      font-size: 16px;
+    }
   }
 
   /* 段落 */
@@ -197,6 +342,21 @@ const StyledContent = styled.div`
   sup {
     top: -0.5em;
   }
+`
+
+const StyledRelated = styled.section`
+  margin-top: 80px;
+`
+
+const StyledHeading1 = styled(Heading1)`
+  font-size: 20px;
+`
+
+const StyledVerticalCardList = styled(VerticalCardList)`
+  margin-top: 24px;
+`
+const StyledSlideCardList = styled(SlideCardList)`
+  margin-top: 24px;
 `
 
 // 動的なページを作成

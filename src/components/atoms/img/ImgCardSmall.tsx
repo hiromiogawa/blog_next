@@ -55,8 +55,8 @@ const StyledLink = styled(Link)`
 `
 
 const StyledImageWrap = styled.div`
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   justify-content: center;
   align-items: center;

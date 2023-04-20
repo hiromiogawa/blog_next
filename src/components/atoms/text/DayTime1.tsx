@@ -9,11 +9,7 @@ export type DayTime1Type = {
 }
 
 const DayTime1 = ({ children, ...props }: DayTime1Type) => {
-  return (
-    <p {...props}>
-      <StyledTime>{convertDateFormat(children)}</StyledTime>
-    </p>
-  )
+  return <StyledTime {...props}>{convertDateFormat(children)}</StyledTime>
 }
 
 export default DayTime1
