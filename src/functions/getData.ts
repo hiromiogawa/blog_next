@@ -76,6 +76,26 @@ export const getBlog = async (id: string) => {
   return data
 }
 
+/** 検索記事一覧取得 */
+export const searchBlogs = async (keyword: string, offset: number = 0) => {
+  const data = await client.get({
+    endpoint: 'blogs',
+    queries: {
+      limit: PER_PAGE,
+      offset: offset,
+      orders: '-createdAt',
+      q: decodeURI(keyword)
+    }
+  })
+
+  return {
+    contents: data.contents,
+    totalCount: data.totalCount,
+    offset: data.offset,
+    limit: data.limit
+  }
+}
+
 /** カテゴリ一覧取得 */
 export const getCategories = async () => {
   const data = await client.get({
