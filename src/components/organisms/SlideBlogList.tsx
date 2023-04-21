@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Device } from '@/styles/vars'
 
 // components
 import Heading1 from '@/components/atoms/text/Heading1'
@@ -6,6 +7,9 @@ import SlideCardList, {
   SlideCardListType
 } from '@/components/organisms/SlideCardList'
 import Button1 from '@/components/atoms/button/Button1'
+
+// functions
+import mediaQuery from '@/styles/functions/mediaQuery'
 
 export type SlideBlogListType = {
   title: string
@@ -46,4 +50,8 @@ const StyledSlideCardList = styled(SlideCardList)`
 
 const StyledButton1 = styled(Button1)`
   margin-top: 24px;
+
+  ${mediaQuery(Device.tb)} {
+    text-align: center;
+  }
 `
