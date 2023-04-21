@@ -2,6 +2,8 @@ import { MAX_LIMIT } from '@/config'
 
 // functions
 import { getBlog, getBlogs, getCategories, getTags } from '@/functions/getData'
+import removeHtmlTags from '@/functions/removeHtmlTags'
+import getFirstNChars from '@/functions/getFirstNChars'
 
 // components
 import ContentsHead from '@/components/common/ContentsHead'
@@ -20,7 +22,10 @@ type ParamsType = ParsedUrlQuery & {
 const DetailPage = ({ ...props }: DetailType) => {
   return (
     <>
-      <ContentsHead title={`${props.blog.title} | `} />
+      <ContentsHead
+        title={`${props.blog.title} | `}
+        description={getFirstNChars(removeHtmlTags(props.blog.content))}
+      />
       <Detail {...props} />
     </>
   )
