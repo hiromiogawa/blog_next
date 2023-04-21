@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import getCardListData from '@/functions/getCardListData'
 
 // components
-import Layout from '@/components/common/Layout'
+import Layout, { LayoutType } from '@/components/common/Layout'
 import VerticalCardList from '@/components/organisms/VerticalCardList'
 import PagiNation, { PagiNationType } from '@/components/molecules/PagiNation'
 
@@ -13,9 +13,8 @@ import type { BlogType, CategoryType, TagType } from '@/types'
 
 export type VerticalCardListsType = {
   blogs: BlogType[]
-  categories: CategoryType[]
-  tags: TagType[]
-} & PagiNationType
+} & PagiNationType &
+  Pick<LayoutType, 'categories' | 'tags'>
 
 const VerticalCardLists = ({
   blogs,

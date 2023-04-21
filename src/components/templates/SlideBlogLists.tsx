@@ -13,7 +13,7 @@ export type SlideBlogListsType = {
     categoryId: string
     data: Pick<BlogType, 'id' | 'category' | 'createdAt' | 'title' | 'tags'>[]
   }[]
-} & LayoutType
+} & Pick<LayoutType, 'categories' | 'tags'>
 const SlideBlogLists = ({ blogs, categories, tags }: SlideBlogListsType) => {
   return (
     <Layout categories={categories} tags={tags}>
