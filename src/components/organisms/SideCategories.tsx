@@ -20,7 +20,7 @@ const SideCategories = ({ categories, ...props }: SideCategoriesType) => {
         {categories.map((category) => (
           <li key={category.name}>
             <ImgCardSmall
-              href={`/blog/${category.id}/1`}
+              href={`/blog/category/${category.id}/1`}
               src={category.logo.url}
               alt={category.name}
               width={category.logo.width}

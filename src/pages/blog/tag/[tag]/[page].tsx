@@ -1,10 +1,16 @@
 import { PER_PAGE, MAX_LIMIT } from '@/config'
 
 // functions
-import { getBlogsByTags, getCategories, getTags } from '@/functions/getData'
+import {
+  getBlogsByTags,
+  getCategories,
+  getTags,
+  getTag
+} from '@/functions/getData'
 import getRange from '@/functions/getRange'
 
 // components
+import ContentsHead from '@/components/common/ContentsHead'
 import VerticalCardLists, {
   VerticalCardListsType
 } from '@/components/templates/VerticalCardLists'
@@ -13,8 +19,19 @@ import VerticalCardLists, {
 import type { GetStaticProps } from 'next'
 import type { ResDataType, ParamsType, TagType } from '@/types'
 
-const BlogListPage = ({ ...props }: VerticalCardListsType) => {
-  return <VerticalCardLists {...props} />
+const BlogListPage = ({
+  data,
+  tag
+}: {
+  data: VerticalCardListsType
+  tag: TagType
+}) => {
+  return (
+    <>
+      <ContentsHead title={`${tag.name} | 記事一覧 | `} />
+      <VerticalCardLists {...data} />
+    </>
+  )
 }
 
 export default BlogListPage
@@ -39,7 +56,7 @@ export const getStaticPaths = async () => {
 
 // データを取得
 export const getStaticProps: GetStaticProps<
-  VerticalCardListsType,
+  { data: VerticalCardListsType; tag: TagType },
   ParamsType & { tag: string }
 > = async (context) => {
   const categoriesData = await getCategories()
@@ -49,13 +66,17 @@ export const getStaticProps: GetStaticProps<
     PER_PAGE,
     (Number(context.params!.page) - 1) * PER_PAGE
   )
+  const tag = await getTag(context.params!.tag)
 
   return {
     props: {
-      blogs: blogsData.contents,
-      totalCount: blogsData.totalCount,
-      categories: categoriesData.contents,
-      tags: tagsData.contents
+      data: {
+        blogs: blogsData.contents,
+        totalCount: blogsData.totalCount,
+        categories: categoriesData.contents,
+        tags: tagsData.contents
+      },
+      tag: tag
     }
   }
 }

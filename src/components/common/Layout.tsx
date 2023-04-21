@@ -5,6 +5,7 @@ import reset from 'styled-reset'
 import mediaQuery from '@/styles/functions/mediaQuery'
 
 // components
+import ContentsHead from './ContentsHead'
 import HeaderContents from '@/components/organisms/HeaderContents'
 import Contents from '@/components/common/Contents'
 import MainContents from '@/components/organisms/MainContents'

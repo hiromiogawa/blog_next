@@ -15,7 +15,11 @@ import type { BlogType, CategoryType } from '@/types'
 
 type PropTypes = SlideBlogListsType
 const TopPage = ({ ...props }: PropTypes) => {
-  return <SlideBlogLists {...props} />
+  return (
+    <>
+      <SlideBlogLists {...props} />
+    </>
+  )
 }
 
 export default TopPage

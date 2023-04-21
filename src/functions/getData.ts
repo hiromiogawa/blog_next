@@ -87,6 +87,12 @@ export const getCategories = async () => {
   }
 }
 
+/** カテゴリ詳細取得 */
+export const getCategory = async (id: string) => {
+  const data = await client.get({ endpoint: 'categories', contentId: id })
+  return data
+}
+
 /** タグ一覧取得 */
 export const getTags = async () => {
   const data = await client.get({
@@ -96,4 +102,10 @@ export const getTags = async () => {
   return {
     contents: data.contents
   }
+}
+
+/** タグ詳細取得 */
+export const getTag = async (id: string) => {
+  const data = await client.get({ endpoint: 'tags', contentId: id })
+  return data
 }

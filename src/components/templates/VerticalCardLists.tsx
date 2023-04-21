@@ -29,7 +29,7 @@ const VerticalCardLists = ({
 
   return (
     <Layout categories={categories} tags={tags}>
-      <VerticalCardList CardListData={cardListData} />
+      <VerticalCardList cardListData={cardListData} />
       <StyledPaginate totalCount={totalCount} sortId={sortId} />
     </Layout>
   )

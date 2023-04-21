@@ -5,6 +5,7 @@ import { getBlogs, getCategories, getTags } from '@/functions/getData'
 import getRange from '@/functions/getRange'
 
 // components
+import ContentsHead from '@/components/common/ContentsHead'
 import VerticalCardLists, {
   VerticalCardListsType
 } from '@/components/templates/VerticalCardLists'
@@ -14,7 +15,12 @@ import type { GetStaticProps } from 'next'
 import type { BlogType, ResDataType, ParamsType } from '@/types'
 
 const BlogListPage = ({ ...props }: VerticalCardListsType) => {
-  return <VerticalCardLists {...props} />
+  return (
+    <>
+      <ContentsHead title="記事一覧 | " />
+      <VerticalCardLists {...props} />
+    </>
+  )
 }
 
 export default BlogListPage

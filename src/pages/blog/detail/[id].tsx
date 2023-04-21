@@ -12,6 +12,7 @@ import getCardListData from '@/functions/getCardListData'
 
 // components
 import Layout, { LayoutType } from '@/components/common/Layout'
+import ContentsHead from '@/components/common/ContentsHead'
 import DayTime1 from '@/components/atoms/text/DayTime1'
 import TagList from '@/components/molecules/TagList'
 import CategoryText from '@/components/atoms/text/CategoryText'
@@ -40,6 +41,7 @@ const Detail = ({ blog, categories, tags }: PropTypes) => {
 
   return (
     <Layout categories={categories} tags={tags}>
+      <ContentsHead title={`${blog.title} | `} />
       <StyledDetail>
         <StyledMeta>
           <StyledCategoryText size="12px" id={blog.category.id}>
