@@ -19,16 +19,10 @@ import VerticalCardLists, {
 import type { GetStaticProps } from 'next'
 import type { ResDataType, ParamsType, TagType } from '@/types'
 
-const BlogListPage = ({
-  data,
-  tag
-}: {
-  data: VerticalCardListsType
-  tag: TagType
-}) => {
+const BlogListPage = ({ data }: { data: VerticalCardListsType }) => {
   return (
     <>
-      <ContentsHead title={`${tag.name} | 記事一覧 | `} />
+      <ContentsHead title={`${data.title} | 記事一覧 | `} />
       <VerticalCardLists {...data} />
     </>
   )
@@ -56,7 +50,7 @@ export const getStaticPaths = async () => {
 
 // データを取得
 export const getStaticProps: GetStaticProps<
-  { data: VerticalCardListsType; tag: TagType },
+  { data: VerticalCardListsType },
   ParamsType & { tag: string }
 > = async (context) => {
   const categoriesData = await getCategories()
@@ -71,12 +65,12 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       data: {
+        title: tag.name,
         blogs: blogsData.contents,
         totalCount: blogsData.totalCount,
         categories: categoriesData.contents,
         tags: tagsData.contents
-      },
-      tag: tag
+      }
     }
   }
 }

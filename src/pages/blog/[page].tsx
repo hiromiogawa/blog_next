@@ -52,6 +52,7 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: {
+      title: 'NEW',
       blogs: blogsData.contents,
       totalCount: blogsData.totalCount,
       categories: categoriesData.contents,
