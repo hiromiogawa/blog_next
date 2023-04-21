@@ -1,9 +1,5 @@
-import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Device } from '@/styles/vars'
-
-// hooks
-import useMediaQuery from '@/hooks/useMediaQuery'
 
 // components
 import { Splide, SplideSlide } from '@splidejs/react-splide'
@@ -22,27 +18,27 @@ const SlideCardList = ({
   showFooter = true,
   ...props
 }: SlideCardListType) => {
-  const [perPage, setPerPage] = useState(3)
-  const isTb = useMediaQuery('tb')
-  const isCt = useMediaQuery('ct')
-
-  useEffect(() => {
-    if (isTb) setPerPage(1)
-    if (isCt && !isTb) setPerPage(2)
-    if (!isCt && !isTb) setPerPage(3)
-  }, [isTb, isCt])
-
   return (
     <StyledSplidWrap {...props}>
       <Splide
         options={{
           rewind: true,
-          perPage: perPage,
+          perPage: 3,
           gap: '24px',
-          pagination: isTb,
+          pagination: false,
           drag: 'free',
           omitEnd: true,
-          arrows: !isTb ? cardListData.length > 3 : false
+          arrows: cardListData.length > 3,
+          breakpoints: {
+            [Device.ct]: {
+              perPage: 2
+            },
+            [Device.tb]: {
+              perPage: 1,
+              arrows: false,
+              pagination: true
+            }
+          }
         }}
       >
         {cardListData.map((cardData) => (
