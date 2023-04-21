@@ -6,6 +6,7 @@ import {
 } from '@/functions/getData'
 
 // components
+import ContentsHead from '@/components/common/ContentsHead'
 import SlideBlogLists, {
   SlideBlogListsType
 } from '@/components/templates/SlideBlogLists'
@@ -17,6 +18,7 @@ type PropTypes = SlideBlogListsType
 const TopPage = ({ ...props }: PropTypes) => {
   return (
     <>
+      <ContentsHead />
       <SlideBlogLists {...props} />
     </>
   )
