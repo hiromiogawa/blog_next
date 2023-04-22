@@ -4,8 +4,10 @@ import reset from 'styled-reset'
 // functions
 import mediaQuery from '@/styles/functions/mediaQuery'
 
+// context
+import { SearchProvider } from '../providers/SearchProvider'
+
 // components
-import ContentsHead from './ContentsHead'
 import HeaderContents from '@/components/organisms/HeaderContents'
 import Contents from '@/components/common/Contents'
 import MainContents from '@/components/organisms/MainContents'
@@ -38,12 +40,14 @@ const Layout = ({ children, categories, tags }: LayoutType) => {
   return (
     <>
       <GlobalStyle />
-      <HeaderContents />
-      <StyledContents>
-        <MainContents>{children}</MainContents>
-        <SideContents categories={categories} tags={tags} />
-      </StyledContents>
-      <FooterContents />
+      <SearchProvider>
+        <HeaderContents />
+        <StyledContents>
+          <MainContents>{children}</MainContents>
+          <SideContents categories={categories} tags={tags} />
+        </StyledContents>
+        <FooterContents />
+      </SearchProvider>
     </>
   )
 }
