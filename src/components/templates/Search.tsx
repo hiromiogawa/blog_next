@@ -57,7 +57,7 @@ const Search = () => {
       searchblogs(keyword, page)
       setIsLoading(true)
     }
-  }, [keyword, isLoading])
+  }, [keyword])
 
   useEffect(() => {
     setCardListData(getCardListData(blogs))
