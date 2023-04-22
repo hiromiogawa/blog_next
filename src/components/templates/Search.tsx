@@ -11,13 +11,16 @@ import {
 import getCardListData from '@/functions/getCardListData'
 
 // components
+import Layout, { LayoutType } from '@/components/common/Layout'
 import LoadingSpinnerBox from '@/components/atoms/Loading'
 import VerticalCardList, {
   VerticalCardListType
 } from '@/components/organisms/VerticalCardList'
 import PagiNationBySearch from '@/components/molecules/PagiNationBySearch'
 
-const Search = () => {
+export type SearchType = Pick<LayoutType, 'categories' | 'tags'>
+
+const Search = ({ categories, tags }: SearchType) => {
   const { keyword, setKeyword, page, setPage, blogs, searchblogs, totalCount } =
     useContext(SearchContext)
   const [cardListData, setCardListData] = useState<
@@ -66,7 +69,7 @@ const Search = () => {
   }, [blogs])
 
   return (
-    <div>
+    <Layout categories={categories} tags={tags}>
       <SearchProvider>
         <Suspense fallback={<StyledLoadingSpinnerBox />}>
           {cardListData.length === 0 ? (
@@ -83,7 +86,7 @@ const Search = () => {
           )}
         </Suspense>
       </SearchProvider>
-    </div>
+    </Layout>
   )
 }
 

@@ -2,16 +2,17 @@
 import { getCategories, getTags } from '@/functions/getData'
 
 // components
-import Search from '@/components/templates/Search'
-import Layout, { LayoutType } from '@/components/common/Layout'
+import ContentsHead from '@/components/common/ContentsHead'
+import Search, { SearchType } from '@/components/templates/Search'
 
-type PropTypes = Pick<LayoutType, 'categories' | 'tags'>
+type PropTypes = Pick<SearchType, 'categories' | 'tags'>
 
 const SearchPage = ({ categories, tags }: PropTypes) => {
   return (
-    <Layout categories={categories} tags={tags}>
-      <Search />
-    </Layout>
+    <>
+      <ContentsHead title="検索結果 | " />
+      <Search categories={categories} tags={tags} />
+    </>
   )
 }
 
