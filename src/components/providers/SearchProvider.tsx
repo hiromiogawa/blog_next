@@ -1,4 +1,5 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState } from 'react'
+import Router, { useRouter } from 'next/router'
 import axios from 'axios'
 
 // types
@@ -35,6 +36,12 @@ export const SearchProvider = ({
   const [page, setPage] = useState<string>('1')
   const [blogs, setBlogs] = useState<BlogType[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
+  const router = useRouter()
+  const currentPath = router.pathname
+
+  const addQueryParams = () => {
+    window.history.pushState(null, '', `?keyword=${keyword}&page=${page}`)
+  }
 
   const searchblogs = async (keyword: string, page: string) => {
     const res = await axios.get('/api/blogs', {
@@ -46,7 +53,18 @@ export const SearchProvider = ({
 
     setTotalCount(res.data.totalCount)
     setBlogs(res.data.contents)
-    window.history.pushState(null, '', `?keyword=${keyword}&page=${page}`)
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    const paramsKeyword = urlParams.get('keyword')
+    const paramsPage = urlParams.get('page')
+
+    if (currentPath !== '/blog/search')
+      Router.push('/blog/search').then(() => {
+        addQueryParams()
+      })
+
+    // パラメータ書き換え
+    if (paramsKeyword !== keyword || paramsPage !== page) addQueryParams()
   }
 
   const handleClickSubmit = () => {
