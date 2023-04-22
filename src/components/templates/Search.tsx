@@ -65,27 +65,26 @@ const Search = ({ categories, tags }: SearchType) => {
   }, [keyword])
 
   useEffect(() => {
-    setCardListData(getCardListData(blogs))
+    console.log(blogs)
+    if (blogs.length !== 0) setCardListData(getCardListData(blogs))
   }, [blogs])
 
   return (
     <Layout categories={categories} tags={tags}>
-      <SearchProvider>
-        <Suspense fallback={<StyledLoadingSpinnerBox />}>
-          {cardListData.length === 0 ? (
-            <p>該当件数は0件です</p>
-          ) : (
-            <>
-              <StyledVerticalCardList cardListData={cardListData} />
-              <StyledPagiNationBySearch
-                totalCount={totalCount}
-                onClick={handleClickPagiNavi}
-                currentPage={Number(page)}
-              />
-            </>
-          )}
-        </Suspense>
-      </SearchProvider>
+      <Suspense fallback={<StyledLoadingSpinnerBox />}>
+        {cardListData.length === 0 ? (
+          <p>該当件数は0件です</p>
+        ) : (
+          <>
+            <StyledVerticalCardList cardListData={cardListData} />
+            <StyledPagiNationBySearch
+              totalCount={totalCount}
+              onClick={handleClickPagiNavi}
+              currentPage={Number(page)}
+            />
+          </>
+        )}
+      </Suspense>
     </Layout>
   )
 }

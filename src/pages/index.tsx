@@ -11,16 +11,19 @@ import SlideBlogLists, {
   SlideBlogListsType
 } from '@/components/templates/SlideBlogLists'
 
+// context
+import { SearchProvider } from '@/components/providers/SearchProvider'
+
 // types
 import type { BlogType, CategoryType } from '@/types'
 
 type PropTypes = SlideBlogListsType
 const TopPage = ({ ...props }: PropTypes) => {
   return (
-    <>
+    <SearchProvider>
       <ContentsHead />
       <SlideBlogLists {...props} />
-    </>
+    </SearchProvider>
   )
 }
 

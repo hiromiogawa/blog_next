@@ -4,6 +4,9 @@ import { PER_PAGE, MAX_LIMIT } from '@/config'
 import { getBlogs, getCategories, getTags } from '@/functions/getData'
 import getRange from '@/functions/getRange'
 
+// context
+import { SearchProvider } from '@/components/providers/SearchProvider'
+
 // components
 import ContentsHead from '@/components/common/ContentsHead'
 import VerticalCardLists, {
@@ -16,10 +19,10 @@ import type { BlogType, ResDataType, ParamsType } from '@/types'
 
 const BlogListPage = ({ ...props }: VerticalCardListsType) => {
   return (
-    <>
+    <SearchProvider>
       <ContentsHead title="記事一覧 | " />
       <VerticalCardLists {...props} />
-    </>
+    </SearchProvider>
   )
 }
 

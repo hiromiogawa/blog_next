@@ -5,6 +5,9 @@ import { getBlog, getBlogs, getCategories, getTags } from '@/functions/getData'
 import removeHtmlTags from '@/functions/removeHtmlTags'
 import getFirstNChars from '@/functions/getFirstNChars'
 
+// context
+import { SearchProvider } from '@/components/providers/SearchProvider'
+
 // components
 import ContentsHead from '@/components/common/ContentsHead'
 import Detail, { DetailType } from '@/components/templates/Detail'
@@ -21,13 +24,13 @@ type ParamsType = ParsedUrlQuery & {
 
 const DetailPage = ({ ...props }: DetailType) => {
   return (
-    <>
+    <SearchProvider>
       <ContentsHead
         title={`${props.blog.title} | `}
         description={getFirstNChars(removeHtmlTags(props.blog.content))}
       />
       <Detail {...props} />
-    </>
+    </SearchProvider>
   )
 }
 

@@ -15,16 +15,18 @@ import VerticalCardLists, {
   VerticalCardListsType
 } from '@/components/templates/VerticalCardLists'
 
+import { SearchProvider } from '@/components/providers/SearchProvider'
+
 // types
 import type { GetStaticProps } from 'next'
 import type { ResDataType, ParamsType, TagType } from '@/types'
 
 const BlogListPage = ({ data }: { data: VerticalCardListsType }) => {
   return (
-    <>
+    <SearchProvider>
       <ContentsHead title={`${data.title} | 記事一覧 | `} />
       <VerticalCardLists {...data} />
-    </>
+    </SearchProvider>
   )
 }
 

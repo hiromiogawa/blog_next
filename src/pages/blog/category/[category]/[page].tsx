@@ -9,6 +9,9 @@ import {
 } from '@/functions/getData'
 import getRange from '@/functions/getRange'
 
+// context
+import { SearchProvider } from '@/components/providers/SearchProvider'
+
 // components
 import ContentsHead from '@/components/common/ContentsHead'
 import VerticalCardLists, {
@@ -21,10 +24,10 @@ import type { CategoryType, ResDataType, ParamsType } from '@/types'
 
 const BlogListPage = ({ data }: { data: VerticalCardListsType }) => {
   return (
-    <>
+    <SearchProvider>
       <ContentsHead title={`${data.title} | 記事一覧 | `} />
       <VerticalCardLists {...data} />
-    </>
+    </SearchProvider>
   )
 }
 
