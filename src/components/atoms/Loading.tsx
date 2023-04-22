@@ -1,8 +1,8 @@
 import styled, { keyframes } from 'styled-components'
 
-const LoadingSpinnerBox = () => {
+const LoadingSpinnerBox = ({ ...props }) => {
   return (
-    <StyledSpinnerBox>
+    <StyledSpinnerBox {...props}>
       <StyledCircleBorder>
         <StyledCircleCore></StyledCircleCore>
       </StyledCircleBorder>

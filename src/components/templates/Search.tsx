@@ -11,7 +11,7 @@ import {
 import getCardListData from '@/functions/getCardListData'
 
 // components
-import Heading1 from '@/components/atoms/text/Heading1'
+import LoadingSpinnerBox from '@/components/atoms/Loading'
 import VerticalCardList, {
   VerticalCardListType
 } from '@/components/organisms/VerticalCardList'
@@ -68,7 +68,7 @@ const Search = () => {
   return (
     <div>
       <SearchProvider>
-        <Suspense fallback={<div>読み込み中...</div>}>
+        <Suspense fallback={<StyledLoadingSpinnerBox />}>
           {cardListData.length === 0 ? (
             <p>該当件数は0件です</p>
           ) : (
@@ -88,6 +88,10 @@ const Search = () => {
 }
 
 export default Search
+
+const StyledLoadingSpinnerBox = styled(LoadingSpinnerBox)`
+  margin: 0 auto;
+`
 
 const StyledVerticalCardList = styled(VerticalCardList)`
   margin-top: 24px;
