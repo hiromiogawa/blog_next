@@ -26,7 +26,9 @@ const Detail = ({ blog, categories, tags }: DetailType) => {
           <Html>{blog.content}</Html>
         </StyledDetailContent>
       </StyledDetail>
-      <StyledDetailRelated blogs={blog.connections} />
+      {blog.connections.length !== 0 && (
+        <StyledDetailRelated blogs={blog.connections} />
+      )}
     </Layout>
   )
 }

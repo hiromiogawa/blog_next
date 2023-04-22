@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import { useState, useEffect, useContext, Suspense } from 'react'
 
 // context
@@ -10,6 +11,7 @@ import {
 import getCardListData from '@/functions/getCardListData'
 
 // components
+import Heading1 from '@/components/atoms/text/Heading1'
 import VerticalCardList, {
   VerticalCardListType
 } from '@/components/organisms/VerticalCardList'
@@ -71,8 +73,8 @@ const Search = () => {
             <p>該当件数は0件です</p>
           ) : (
             <>
-              <VerticalCardList cardListData={cardListData} />
-              <PagiNationBySearch
+              <StyledVerticalCardList cardListData={cardListData} />
+              <StyledPagiNationBySearch
                 totalCount={totalCount}
                 onClick={handleClickPagiNavi}
                 currentPage={Number(page)}
@@ -86,3 +88,11 @@ const Search = () => {
 }
 
 export default Search
+
+const StyledVerticalCardList = styled(VerticalCardList)`
+  margin-top: 24px;
+`
+
+const StyledPagiNationBySearch = styled(PagiNationBySearch)`
+  margin-top: 40px;
+`

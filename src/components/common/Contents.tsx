@@ -20,7 +20,7 @@ const StyledContents = styled.div`
   margin: 0 auto;
   width: 100%;
 
-  ${mediaQuery('ct')} {
+  ${mediaQuery('tb')} {
     padding: 0 16px;
   }
 `
