@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Device } from '@/styles/vars'
 
 // functions
 import mediaQuery from '@/styles/functions/mediaQuery'
@@ -25,10 +24,10 @@ const StyledMain = styled.main`
   margin: 0 auto;
   width: 100%;
 
-  ${mediaQuery(Device.ct)} {
+  ${mediaQuery('ct')} {
     padding: 0;
   }
 
-  ${mediaQuery(Device.tb)} {
+  ${mediaQuery('tb')} {
   }
 `

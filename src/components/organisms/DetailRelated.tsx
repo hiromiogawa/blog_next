@@ -12,7 +12,7 @@ import SlideCardList from '@/components/organisms/SlideCardList'
 import VerticalCardList from '@/components/organisms/VerticalCardList'
 
 // types
-import type { BlogType, ResDataType } from '@/types'
+import type { BlogType } from '@/types'
 
 export type DetailRelatedType = {
   blogs: BlogType[]

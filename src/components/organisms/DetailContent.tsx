@@ -1,9 +1,8 @@
 import styled from 'styled-components'
-import { Device } from '@/styles/vars'
 import mediaQuery from '@/styles/functions/mediaQuery'
 
 const DetailContent = styled.div`
-  ${mediaQuery(Device.tb)} {
+  ${mediaQuery('tb')} {
     margin-top: 32px;
   }
   > * {
@@ -36,7 +35,7 @@ const DetailContent = styled.div`
     border-radius: 12px;
     border: solid 3px #00ae95;
 
-    ${mediaQuery(Device.tb)} {
+    ${mediaQuery('tb')} {
       font-size: 28px;
       padding: 6px;
     }
@@ -50,7 +49,7 @@ const DetailContent = styled.div`
     margin-top: 48px;
     font-size: 28px;
     border-bottom: double 5px #00ae95;
-    ${mediaQuery(Device.tb)} {
+    ${mediaQuery('tb')} {
       font-size: 24px;
     }
 
@@ -66,7 +65,7 @@ const DetailContent = styled.div`
     color: #00ae95;
     background: transparent;
     border-left: solid 5px #00ae95;
-    ${mediaQuery(Device.tb)} {
+    ${mediaQuery('tb')} {
       font-size: 20px;
       padding: 2px 2px;
     }
@@ -76,7 +75,7 @@ const DetailContent = styled.div`
     margin-top: 24px;
     font-size: 20px;
     border-bottom: solid 3px #00ae95;
-    ${mediaQuery(Device.tb)} {
+    ${mediaQuery('tb')} {
       font-size: 18px;
     }
   }
@@ -85,7 +84,7 @@ const DetailContent = styled.div`
     margin-top: 20px;
     font-size: 18px;
     color: #00ae95;
-    ${mediaQuery(Device.tb)} {
+    ${mediaQuery('tb')} {
       font-size: 16px;
     }
   }

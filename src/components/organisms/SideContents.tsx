@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Device } from '@/styles/vars'
 
 // funtions
 import mediaQuery from '@/styles/functions/mediaQuery'
@@ -29,7 +28,7 @@ const StyledAside = styled.aside`
   width: 100%;
   margin-left: 32px;
 
-  ${mediaQuery(Device.ct)} {
+  ${mediaQuery('ct')} {
     max-width: 864px;
     padding: 0;
     margin: 80px auto 0;

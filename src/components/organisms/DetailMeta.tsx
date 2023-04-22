@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Device } from '@/styles/vars'
 
 // functions
 import mediaQuery from '@/styles/functions/mediaQuery'
@@ -54,7 +53,7 @@ const StyledTitle = styled.h1`
   border-radius: 12px;
   line-height: 1.4;
 
-  ${mediaQuery(Device.tb)} {
+  ${mediaQuery('tb')} {
     font-size: 28px;
     padding: 6px;
   }
@@ -70,12 +69,12 @@ const StyledDay = styled.ul`
   justify-content: flex-end;
   margin-top: -1em;
   gap: 8px;
-  ${mediaQuery(Device.tb)} {
+  ${mediaQuery('tb')} {
     justify-content: flex-start;
     margin-top: 4px;
     font-size: 14px;
   }
-  ${mediaQuery(Device.sp)} {
+  ${mediaQuery('sp')} {
     display: block;
 
     > *:not(:first-child) {

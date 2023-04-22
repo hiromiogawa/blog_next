@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Device } from '@/styles/vars'
 
 // components
 import Heading1 from '@/components/atoms/text/Heading1'
@@ -51,7 +50,7 @@ const StyledSlideCardList = styled(SlideCardList)`
 const StyledButton1 = styled(Button1)`
   margin-top: 24px;
 
-  ${mediaQuery(Device.tb)} {
+  ${mediaQuery('tb')} {
     text-align: center;
   }
 `

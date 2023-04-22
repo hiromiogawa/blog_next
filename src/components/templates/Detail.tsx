@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Device } from '@/styles/vars'
 
 // functions
 import mediaQuery from '@/styles/functions/mediaQuery'
@@ -41,7 +40,7 @@ const StyledDetail = styled.section`
   padding: 32px;
   border-radius: 12px;
   border: solid 3px #00ae95;
-  ${mediaQuery(Device.tb)} {
+  ${mediaQuery('tb')} {
     margin: 0 -16px;
   }
 `
