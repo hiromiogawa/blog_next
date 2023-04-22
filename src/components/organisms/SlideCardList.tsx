@@ -30,10 +30,10 @@ const SlideCardList = ({
           omitEnd: true,
           arrows: cardListData.length > 3,
           breakpoints: {
-            [Device.ct]: {
+            [Device.ct - 1]: {
               perPage: 2
             },
-            [Device.tb]: {
+            [Device.tb - 1]: {
               perPage: 1,
               arrows: false,
               pagination: true

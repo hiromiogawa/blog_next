@@ -21,6 +21,8 @@ const useMediaQuery = (
       const nowIsMatch = isMatches()
       setIsMatch(() => nowIsMatch)
     }
+
+    resetIsMatch()
     window.addEventListener('resize', resetIsMatch)
     return () => {
       window.removeEventListener('resize', resetIsMatch)
