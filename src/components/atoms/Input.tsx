@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 
 export type InputType = {
@@ -14,18 +15,30 @@ const Input = ({
   placeholder = '',
   ...props
 }: InputType) => {
-  const handleKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && !event.nativeEvent.isComposing) {
+  const [isComposing, setIsComposing] = useState(false)
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && !isComposing) {
       event.preventDefault()
       handleClickSubmit()
     }
   }
+
+  const handleCompositionStart = () => {
+    setIsComposing(true)
+  }
+
+  const handleCompositionEnd = () => {
+    setIsComposing(false)
+  }
+
   return (
     <StyledInput
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      onKeyDown={handleKey}
-      onKeyUp={handleKey}
+      onKeyDown={handleKeyDown}
+      onCompositionStart={handleCompositionStart}
+      onCompositionEnd={handleCompositionEnd}
       placeholder={placeholder}
       {...props}
     />
