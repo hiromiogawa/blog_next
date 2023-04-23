@@ -2,10 +2,7 @@ import styled from 'styled-components'
 import { useState, useEffect, useContext, Suspense } from 'react'
 
 // context
-import {
-  SearchContext,
-  SearchProvider
-} from '@/components/providers/SearchProvider'
+import { SearchContext } from '@/components/providers/SearchProvider'
 
 // functions
 import getCardListData from '@/functions/getCardListData'
@@ -21,8 +18,16 @@ import PagiNationBySearch from '@/components/molecules/PagiNationBySearch'
 export type SearchType = Pick<LayoutType, 'categories' | 'tags'>
 
 const Search = ({ categories, tags }: SearchType) => {
-  const { keyword, setKeyword, page, setPage, blogs, searchblogs, totalCount } =
-    useContext(SearchContext)
+  const {
+    keyword,
+    setKeyword,
+    page,
+    setPage,
+    blogs,
+    searchblogs,
+    totalCount,
+    dataLoaded
+  } = useContext(SearchContext)
   const [cardListData, setCardListData] = useState<
     VerticalCardListType['cardListData'] | []
   >([])
@@ -65,14 +70,13 @@ const Search = ({ categories, tags }: SearchType) => {
   }, [keyword])
 
   useEffect(() => {
-    console.log(blogs)
     if (blogs.length !== 0) setCardListData(getCardListData(blogs))
   }, [blogs])
 
   return (
     <Layout categories={categories} tags={tags}>
-      <Suspense fallback={<StyledLoadingSpinnerBox />}>
-        {cardListData.length === 0 ? (
+      {dataLoaded ? (
+        cardListData.length === 0 ? (
           <p>該当件数は0件です</p>
         ) : (
           <>
@@ -83,8 +87,10 @@ const Search = ({ categories, tags }: SearchType) => {
               currentPage={Number(page)}
             />
           </>
-        )}
-      </Suspense>
+        )
+      ) : (
+        <StyledLoadingSpinnerBox />
+      )}
     </Layout>
   )
 }

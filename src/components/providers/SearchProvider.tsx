@@ -14,6 +14,8 @@ export type SearchContextType = {
   totalCount: number
   searchblogs: Function
   handleClickSubmit: () => void
+  dataLoaded: boolean
+  setDataLoaded: (event: boolean) => void
 }
 
 export const SearchContext = createContext<SearchContextType>({
@@ -24,7 +26,9 @@ export const SearchContext = createContext<SearchContextType>({
   blogs: [],
   totalCount: 0,
   searchblogs: () => {},
-  handleClickSubmit: () => {}
+  handleClickSubmit: () => {},
+  dataLoaded: false,
+  setDataLoaded: () => {}
 })
 
 export const SearchProvider = ({
@@ -36,6 +40,7 @@ export const SearchProvider = ({
   const [page, setPage] = useState<string>('1')
   const [blogs, setBlogs] = useState<BlogType[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
+  const [dataLoaded, setDataLoaded] = useState<boolean>(false)
   const router = useRouter()
   const currentPath = router.pathname
 
@@ -44,6 +49,7 @@ export const SearchProvider = ({
   }
 
   const searchblogs = async (keyword: string, page: string) => {
+    setDataLoaded(false)
     const res = await axios.get('/api/blogs', {
       params: {
         keyword,
@@ -65,6 +71,8 @@ export const SearchProvider = ({
 
     // パラメータ書き換え
     if (paramsKeyword !== keyword || paramsPage !== page) addQueryParams()
+
+    setDataLoaded(true)
   }
 
   const handleClickSubmit = () => {
@@ -82,7 +90,9 @@ export const SearchProvider = ({
         blogs,
         totalCount,
         searchblogs,
-        handleClickSubmit
+        handleClickSubmit,
+        dataLoaded,
+        setDataLoaded
       }}
     >
       {children}
